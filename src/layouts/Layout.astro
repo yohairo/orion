@@ -1,0 +1,76 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Scale Your Business Without Limits - Orion Modern Tech Platform" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-background-primary text-text-primary font-sans antialiased overflow-x-hidden">
+    <!-- Background Effects -->
+    <div class="fixed inset-0 bg-gradient-radial pointer-events-none"></div>
+    <div class="fixed inset-0 bg-gradient-mesh pointer-events-none opacity-30"></div>
+    
+    <!-- Main Content -->
+    <main class="relative z-10">
+      <slot />
+    </main>
+
+    <style is:global>
+      * {
+        box-sizing: border-box;
+      }
+      
+      html {
+        font-family: 'Inter', system-ui, sans-serif;
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+        background: rgb(9, 9, 11);
+        overflow-x: hidden;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: rgb(24, 24, 27);
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: rgb(139, 92, 246);
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgb(109, 40, 217);
+      }
+
+      /* Smooth animations */
+      * {
+        transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+      }
+    </style>
+  </body>
+</html> 

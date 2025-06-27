@@ -1,0 +1,78 @@
+---
+// Navigation component
+---
+
+<nav class="fixed top-0 w-full z-50 bg-background-primary/80 backdrop-blur-xl border-b border-border-primary">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-sm">O</span>
+            </div>
+            <span class="text-text-primary font-bold text-xl">Orion</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-8">
+          <a href="#features" class="text-text-secondary hover:text-text-primary transition-colors duration-200 px-3 py-2 text-sm font-medium">Features</a>
+          <a href="#showcase" class="text-text-secondary hover:text-text-primary transition-colors duration-200 px-3 py-2 text-sm font-medium">Solutions</a>
+          <a href="#pricing" class="text-text-secondary hover:text-text-primary transition-colors duration-200 px-3 py-2 text-sm font-medium">Pricing</a>
+          <a href="#testimonials" class="text-text-secondary hover:text-text-primary transition-colors duration-200 px-3 py-2 text-sm font-medium">Reviews</a>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="hidden md:flex items-center space-x-4">
+        <button class="text-text-secondary hover:text-text-primary transition-colors duration-200 px-4 py-2 text-sm font-medium">
+          Sign In
+        </button>
+        <button class="bg-primary-main hover:bg-primary-dark text-white px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-main/30">
+          Get Started
+        </button>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button type="button" class="text-text-secondary hover:text-text-primary focus:outline-none focus:text-text-primary transition-colors duration-200" id="mobile-menu-button">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="md:hidden hidden" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 bg-background-secondary/95 backdrop-blur-xl border-t border-border-primary">
+      <a href="#features" class="text-text-secondary hover:text-text-primary block px-3 py-2 text-base font-medium transition-colors duration-200">Features</a>
+      <a href="#showcase" class="text-text-secondary hover:text-text-primary block px-3 py-2 text-base font-medium transition-colors duration-200">Solutions</a>
+      <a href="#pricing" class="text-text-secondary hover:text-text-primary block px-3 py-2 text-base font-medium transition-colors duration-200">Pricing</a>
+      <a href="#testimonials" class="text-text-secondary hover:text-text-primary block px-3 py-2 text-base font-medium transition-colors duration-200">Reviews</a>
+      <div class="pt-4 border-t border-border-primary">
+        <a href="#" class="text-text-secondary hover:text-text-primary block px-3 py-2 text-base font-medium transition-colors duration-200">Sign In</a>
+        <a href="#" class="bg-primary-main hover:bg-primary-dark text-white block px-3 py-2 rounded-lg text-base font-semibold transition-colors duration-200 mx-3 mt-2">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  });
+</script> 

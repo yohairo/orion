@@ -1,0 +1,256 @@
+---
+// Pricing Section component
+---
+
+<section id="pricing" class="py-20 lg:py-32 bg-background-primary relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+        Simple, Transparent
+        <span class="bg-gradient-primary bg-clip-text text-transparent">Pricing</span>
+      </h2>
+      <p class="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed mb-8">
+        Choose the perfect plan for your business. Scale up or down anytime with no hidden fees.
+      </p>
+      
+      <!-- Billing Toggle -->
+      <div class="flex items-center justify-center space-x-4 mb-12">
+        <span class="text-text-secondary">Monthly</span>
+        <div class="relative">
+          <button class="w-12 h-6 bg-background-secondary rounded-full border border-border-primary focus:outline-none focus:ring-2 focus:ring-primary-main transition-colors duration-200" onclick="toggleBilling()">
+            <div class="w-5 h-5 bg-primary-main rounded-full shadow-md transform transition-transform duration-200 translate-x-0.5" id="toggle-dot"></div>
+          </button>
+        </div>
+        <span class="text-text-primary">Annual <span class="text-secondary-main text-sm font-medium">(Save 20%)</span></span>
+      </div>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+      
+      <!-- Starter Plan -->
+      <div class="bg-background-card/80 backdrop-blur-xl border border-border-primary rounded-2xl p-8 relative group hover:border-border-accent transition-all duration-300 hover:transform hover:-translate-y-2">
+        <div class="text-center mb-8">
+          <h3 class="text-xl font-semibold text-text-primary mb-2">Starter</h3>
+          <p class="text-text-secondary mb-6">Perfect for small teams getting started</p>
+          <div class="mb-6">
+            <span class="text-4xl font-bold text-text-primary">$0</span>
+            <span class="text-text-muted">/month</span>
+          </div>
+          <button class="w-full border border-border-primary hover:border-border-accent bg-background-glassmorphism backdrop-blur-sm text-text-primary py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-background-secondary/50">
+            Start Free
+          </button>
+        </div>
+        
+        <!-- Features -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Up to 5 team members</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">10 workflows</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Basic analytics</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Email support</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">5GB storage</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Plan (Popular) -->
+      <div class="bg-background-card/80 backdrop-blur-xl border-2 border-primary-main rounded-2xl p-8 relative group hover:border-primary-light transition-all duration-300 hover:transform hover:-translate-y-2 scale-105">
+        <!-- Popular Badge -->
+        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+          <div class="bg-gradient-primary text-white px-6 py-2 rounded-full text-sm font-semibold">
+            Most Popular
+          </div>
+        </div>
+        
+        <div class="text-center mb-8">
+          <h3 class="text-xl font-semibold text-text-primary mb-2">Professional</h3>
+          <p class="text-text-secondary mb-6">For growing teams and businesses</p>
+          <div class="mb-6">
+            <span class="text-4xl font-bold text-text-primary">
+              <span id="pro-price">$39</span>
+            </span>
+            <span class="text-text-muted">/month</span>
+          </div>
+          <button class="w-full bg-primary-main hover:bg-primary-dark text-white py-3 rounded-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-main/30">
+            Start Free Trial
+          </button>
+        </div>
+        
+        <!-- Features -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Up to 25 team members</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Unlimited workflows</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Advanced analytics</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Priority support</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">100GB storage</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">API access</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enterprise Plan -->
+      <div class="bg-background-card/80 backdrop-blur-xl border border-border-primary rounded-2xl p-8 relative group hover:border-border-accent transition-all duration-300 hover:transform hover:-translate-y-2">
+        <div class="text-center mb-8">
+          <h3 class="text-xl font-semibold text-text-primary mb-2">Enterprise</h3>
+          <p class="text-text-secondary mb-6">For large organizations with advanced needs</p>
+          <div class="mb-6">
+            <span class="text-4xl font-bold text-text-primary">
+              <span id="enterprise-price">$79</span>
+            </span>
+            <span class="text-text-muted">/month</span>
+          </div>
+          <button class="w-full bg-gradient-accent text-white py-3 rounded-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg hover:shadow-secondary-main/30">
+            Contact Sales
+          </button>
+        </div>
+        
+        <!-- Features -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Unlimited team members</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Enterprise workflows</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Custom analytics</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">24/7 dedicated support</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">Unlimited storage</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-secondary-main flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-text-secondary">SSO & advanced security</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="text-center mb-16">
+      <h3 class="text-2xl font-bold text-text-primary mb-8">Frequently Asked Questions</h3>
+      <div class="max-w-3xl mx-auto text-left">
+        <div class="space-y-6">
+          <div class="bg-background-card/50 backdrop-blur-sm border border-border-primary rounded-xl p-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-2">Can I change plans anytime?</h4>
+            <p class="text-text-secondary">Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate your billing accordingly.</p>
+          </div>
+          <div class="bg-background-card/50 backdrop-blur-sm border border-border-primary rounded-xl p-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-2">Is there a free trial?</h4>
+            <p class="text-text-secondary">Absolutely! All paid plans come with a 14-day free trial. No credit card required to get started.</p>
+          </div>
+          <div class="bg-background-card/50 backdrop-blur-sm border border-border-primary rounded-xl p-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-2">What payment methods do you accept?</h4>
+            <p class="text-text-secondary">We accept all major credit cards, PayPal, and bank transfers for Enterprise customers. All payments are processed securely.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="text-center">
+      <p class="text-text-secondary mb-6">Still have questions? Our team is here to help.</p>
+      <button class="border border-border-primary hover:border-border-accent bg-background-glassmorphism backdrop-blur-sm text-text-primary px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:bg-background-secondary/50">
+        Contact Sales
+      </button>
+    </div>
+  </div>
+
+  <!-- Background Elements -->
+  <div class="absolute top-0 left-0 w-1/2 h-full bg-gradient-radial opacity-20 pointer-events-none"></div>
+</section>
+
+<script>
+  let isAnnual = false;
+  
+  function toggleBilling() {
+    isAnnual = !isAnnual;
+    const toggle = document.getElementById('toggle-dot');
+    const proPrice = document.getElementById('pro-price');
+    const enterprisePrice = document.getElementById('enterprise-price');
+    
+    if (isAnnual) {
+      toggle.classList.add('translate-x-6');
+      proPrice.textContent = '$31';
+      enterprisePrice.textContent = '$63';
+    } else {
+      toggle.classList.remove('translate-x-6');
+      proPrice.textContent = '$39';
+      enterprisePrice.textContent = '$79';
+    }
+  }
+</script> 
