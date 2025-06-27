@@ -35,6 +35,10 @@ export default {
           secondary: 'rgba(255, 255, 255, 0.05)',
           accent: 'rgba(139, 92, 246, 0.3)',
         },
+        purple: {
+          600: '#9333ea',
+          700: '#7c3aed',
+        },
       },
       backgroundImage: {
         'gradient-primary': 'linear-gradient(135deg, rgb(139, 92, 246) 0%, rgb(109, 40, 217) 100%)',
@@ -46,17 +50,46 @@ export default {
         xs: '2px',
       },
       animation: {
+        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+        'fade-in-up-delay': 'fadeInUp 0.8s ease-out 0.3s forwards',
+        'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
+        'twinkle': 'twinkle 3s ease-in-out infinite',
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
+        fadeInUp: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(30px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
         },
-        glow: {
-          '0%': { filter: 'drop-shadow(0 0 5px rgba(139, 92, 246, 0.5))' },
-          '100%': { filter: 'drop-shadow(0 0 20px rgba(139, 92, 246, 0.8))' },
+        pulseSoft: {
+          '0%, 100%': {
+            opacity: '0.5',
+          },
+          '50%': {
+            opacity: '0.8',
+          },
+        },
+        float: {
+          '0%, 100%': {
+            transform: 'translateY(0px)',
+          },
+          '50%': {
+            transform: 'translateY(-10px)',
+          },
+        },
+        twinkle: {
+          '0%, 100%': {
+            opacity: '0.3',
+          },
+          '50%': {
+            opacity: '0.8',
+          },
         },
       },
     },
