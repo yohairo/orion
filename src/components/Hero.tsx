@@ -107,9 +107,9 @@ const ShootingStars: React.FC = () => {
       const spreadDistance = (i * 120) + Math.random() * 180;
       const perpendicularAngle = trajectoryAngle - (Math.PI / 2); // Exactly 90° perpendicular to 15°
       
-      // Base starting position (off-screen top-left)
-      const baseStartX = -400;
-      const baseStartY = -300;
+      // Base starting position (off-screen top-left, moved further left)
+      const baseStartX = -1200;
+      const baseStartY = -100;
       
       // Each asteroid positioned on perpendicular line for perfect parallel movement
       const startX = baseStartX + Math.cos(perpendicularAngle) * spreadDistance;
@@ -122,7 +122,7 @@ const ShootingStars: React.FC = () => {
       return {
         id: i,
         delay: i * (deviceInfo.isMobile ? 1.5 : 1) + Math.random() * 2,
-        duration: deviceInfo.isMobile ? 2 + Math.random() * 1 : 1.8 + Math.random() * 1.2,
+        duration: deviceInfo.isMobile ? 0.2 + 5 * 1 : 1.8 + Math.random() * 1.2,
         startX,
         startY,
         endX,
