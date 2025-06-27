@@ -24,7 +24,7 @@ const Navigation: React.FC = () => {
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             <div className="text-white font-bold text-xl tracking-tight">
-              Orion
+              ORION
             </div>
           </motion.div>
 

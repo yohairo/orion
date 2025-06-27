@@ -21,6 +21,119 @@ const AnnouncementBadge: React.FC = () => (
   </motion.div>
 );
 
+const ShootingStars: React.FC = () => {
+  const [dimensions, setDimensions] = React.useState({ width: 1200, height: 800 });
+
+  React.useEffect(() => {
+    const updateDimensions = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
+  const asteroids = React.useMemo(() => 
+    Array.from({ length: 6 }, (_, i) => ({
+      id: i,
+      delay: i * 3 + Math.random() * 3,
+      duration: 2.5 + Math.random() * 1.5,
+      startX: -100 - Math.random() * 200,
+      startY: -100 - Math.random() * 200,
+      endX: dimensions.width + 200,
+      endY: dimensions.height + 200,
+      size: 0.8 + Math.random() * 1.2,
+      brightness: 0.6 + Math.random() * 0.4,
+    })), [dimensions]
+  );
+
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {asteroids.map((asteroid) => (
+        <motion.div
+          key={asteroid.id}
+          className="absolute"
+          initial={{
+            x: asteroid.startX,
+            y: asteroid.startY,
+            opacity: 0,
+          }}
+          animate={{
+            x: asteroid.endX,
+            y: asteroid.endY,
+            opacity: [0, asteroid.brightness, asteroid.brightness, 0],
+          }}
+          transition={{
+            duration: asteroid.duration,
+            delay: asteroid.delay,
+            repeat: Infinity,
+            repeatDelay: 8 + Math.random() * 12,
+            ease: "linear",
+          }}
+        >
+          {/* Main asteroid body */}
+          <div
+            className="bg-white rounded-full"
+            style={{
+              width: `${asteroid.size}px`,
+              height: `${asteroid.size}px`,
+              boxShadow: `
+                0 0 ${asteroid.size * 3}px rgba(255, 255, 255, 0.9),
+                0 0 ${asteroid.size * 6}px rgba(168, 85, 247, 0.5),
+                0 0 ${asteroid.size * 12}px rgba(168, 85, 247, 0.2)
+              `,
+            }}
+          />
+          
+          {/* Multi-layered trailing effect */}
+          {/* Main trail */}
+          <div
+            className="absolute top-0 left-0"
+            style={{
+              width: `${asteroid.size * 52}px`,
+              height: `${asteroid.size * 0.6}px`,
+              background: 'linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 20%, rgba(168,85,247,0.4) 50%, rgba(168,85,247,0.2) 80%, transparent 100%)',
+              transform: 'rotate(-135deg) translateX(10%) translateY(-50%)',
+              filter: 'blur(0.2px)',
+              borderRadius: '50px',
+            }}
+          />
+          
+          {/* Secondary trail (longer and more diffuse) */}
+          <div
+            className="absolute top-0 left-0"
+            style={{
+              width: `${asteroid.size * 78}px`,
+              height: `${asteroid.size * 0.3}px`,
+              background: 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(168,85,247,0.3) 30%, rgba(168,85,247,0.15) 60%, transparent 100%)',
+              transform: 'rotate(-135deg) translateX(15%) translateY(-50%)',
+              filter: 'blur(0.5px)',
+              borderRadius: '50px',
+            }}
+          />
+          
+          {/* Outer glow trail */}
+          <div
+            className="absolute top-0 left-0"
+            style={{
+              width: `${asteroid.size * 104}px`,
+              height: `${asteroid.size * 0.8}px`,
+              background: 'linear-gradient(90deg, rgba(168,85,247,0.2) 0%, rgba(168,85,247,0.1) 40%, transparent 100%)',
+              transform: 'rotate(-135deg) translateX(20%) translateY(-50%)',
+              filter: 'blur(1px)',
+              borderRadius: '50px',
+            }}
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
 const MainHeadline: React.FC = () => (
   <motion.h1
     className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white text-center mb-6 leading-tight tracking-tight"
@@ -112,6 +225,9 @@ const Hero: React.FC = () => {
       {/* Animated Background */}
       <StarField />
       
+      {/* Shooting Stars/Asteroids */}
+      <ShootingStars />
+      
       {/* Navigation */}
       <Navigation />
       
@@ -131,6 +247,14 @@ const Hero: React.FC = () => {
       
       {/* Additional Visual Effects */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Planet Image at Bottom Right */}
+      <img
+        src="https://framerusercontent.com/images/mxEaXiTolMxyIpLhCGhu0k1J4MI.png"
+        alt="Planet"
+        className="absolute -bottom-10 w-full lg:-bottom-40 pointer-events-none select-none z-0"
+        style={{ objectFit: 'contain' }}
+        draggable={false}
+      />
     </section>
   );
 };

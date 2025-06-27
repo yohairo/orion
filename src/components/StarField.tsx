@@ -7,28 +7,52 @@ interface Star {
   y: number;
   size: number;
   opacity: number;
-  speed: number;
-  direction: number;
+  twinkleSpeed: number;
+  color: string;
+  layer: number; // for depth
 }
 
 const StarField: React.FC = () => {
   const [dimensions, setDimensions] = useState({ width: 1920, height: 1080 });
 
-  // Generate stars on component mount
+  // Generate stars with more realistic space-like properties
   const stars = useMemo(() => {
     const starArray: Star[] = [];
-    for (let i = 0; i < 80; i++) {
+    const colors = ['#ffffff', '#e6f3ff', '#fff9e6', '#f0f8ff', '#ffeaa7'];
+    
+    for (let i = 0; i < 150; i++) {
       starArray.push({
         id: i,
         x: Math.random() * dimensions.width,
         y: Math.random() * dimensions.height,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.3,
-        speed: Math.random() * 20 + 10,
-        direction: Math.random() * Math.PI * 2,
+        size: Math.random() * 3 + 0.5, // Varied star sizes
+        opacity: Math.random() * 0.8 + 0.2,
+        twinkleSpeed: Math.random() * 3 + 2, // Different twinkle speeds
+        color: colors[Math.floor(Math.random() * colors.length)],
+        layer: Math.floor(Math.random() * 3), // 3 depth layers
       });
     }
     return starArray;
+  }, [dimensions]);
+
+  // Generate some larger "distant" stars that barely move
+  const distantStars = useMemo(() => {
+    const distantArray: Star[] = [];
+    const colors = ['#ffffff', '#e6f3ff', '#fff9e6'];
+    
+    for (let i = 0; i < 30; i++) {
+      distantArray.push({
+        id: i + 1000,
+        x: Math.random() * dimensions.width,
+        y: Math.random() * dimensions.height,
+        size: Math.random() * 1.5 + 1,
+        opacity: Math.random() * 0.6 + 0.3,
+        twinkleSpeed: Math.random() * 4 + 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        layer: 0,
+      });
+    }
+    return distantArray;
   }, [dimensions]);
 
   useEffect(() => {
@@ -44,118 +68,124 @@ const StarField: React.FC = () => {
     return () => window.removeEventListener('resize', updateDimensions);
   }, []);
 
-  // Calculate connections between nearby stars
-  const connections = useMemo(() => {
-    const connectionArray: { from: Star; to: Star; distance: number }[] = [];
-    for (let i = 0; i < stars.length; i++) {
-      for (let j = i + 1; j < stars.length; j++) {
-        const distance = Math.sqrt(
-          Math.pow(stars[i].x - stars[j].x, 2) + Math.pow(stars[i].y - stars[j].y, 2)
-        );
-        if (distance < 150) {
-          connectionArray.push({
-            from: stars[i],
-            to: stars[j],
-            distance,
-          });
-        }
-      }
-    }
-    return connectionArray;
-  }, [stars]);
-
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <svg
-        width={dimensions.width}
-        height={dimensions.height}
-        className="absolute inset-0"
-        style={{ willChange: 'transform' }}
-      >
-        {/* Connection lines */}
-        {connections.map((connection, index) => (
-          <motion.line
-            key={`connection-${index}`}
-            x1={connection.from.x}
-            y1={connection.from.y}
-            x2={connection.to.x}
-            y2={connection.to.y}
-            stroke="rgba(255, 255, 255, 0.1)"
-            strokeWidth="1"
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: 0.1 - (connection.distance / 150) * 0.1,
-              x1: connection.from.x,
-              y1: connection.from.y,
-              x2: connection.to.x,
-              y2: connection.to.y,
-            }}
-            transition={{ duration: 0.5 }}
-          />
-        ))}
-
-        {/* Stars */}
-        {stars.map((star) => (
-          <motion.circle
-            key={star.id}
-            r={star.size}
-            fill="white"
-            initial={{ 
-              x: star.x, 
-              y: star.y, 
-              opacity: star.opacity 
+      {/* Distant background stars - barely visible, no movement */}
+      <div className="absolute inset-0 opacity-40">
+        {distantStars.map((star) => (
+          <motion.div
+            key={`distant-${star.id}`}
+            className="absolute rounded-full"
+            style={{
+              left: star.x,
+              top: star.y,
+              width: star.size,
+              height: star.size,
+              backgroundColor: star.color,
+              boxShadow: `0 0 ${star.size * 2}px ${star.color}`,
             }}
             animate={{
+              opacity: [star.opacity * 0.3, star.opacity * 0.8, star.opacity * 0.3],
+              scale: [0.8, 1.2, 0.8],
+            }}
+            transition={{
+              duration: star.twinkleSpeed,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 3,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main star field */}
+      <div className="absolute inset-0">
+        {stars.map((star) => (
+          <motion.div
+            key={`star-${star.id}`}
+            className="absolute rounded-full"
+            style={{
+              width: star.size,
+              height: star.size,
+              backgroundColor: star.color,
+              boxShadow: `0 0 ${star.size * 3}px ${star.color}`,
+              willChange: 'transform, opacity',
+              filter: `blur(${star.layer * 0.3}px)`, // Depth blur
+            }}
+            initial={{
+              x: star.x,
+              y: star.y,
+              opacity: star.opacity,
+            }}
+            animate={{
+              // Gentle drift movement
               x: [
                 star.x,
-                star.x + Math.cos(star.direction) * 100,
-                star.x + Math.cos(star.direction) * 200,
+                star.x + (Math.random() - 0.5) * 20,
                 star.x,
               ],
               y: [
                 star.y,
-                star.y + Math.sin(star.direction) * 100,
-                star.y + Math.sin(star.direction) * 200,
+                star.y + (Math.random() - 0.5) * 20,
                 star.y,
               ],
-              opacity: [star.opacity, star.opacity * 1.5, star.opacity],
-            }}
-            transition={{
-              duration: star.speed,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            style={{ willChange: 'transform, opacity' }}
-          />
-        ))}
-      </svg>
-
-      {/* Additional floating particles for depth */}
-      <div className="absolute inset-0">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <motion.div
-            key={`particle-${i}`}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-20"
-            initial={{
-              x: Math.random() * dimensions.width,
-              y: Math.random() * dimensions.height,
-            }}
-            animate={{
-              y: [
-                Math.random() * dimensions.height,
-                -20,
+              // Twinkling effect
+              opacity: [
+                star.opacity * 0.3,
+                star.opacity,
+                star.opacity * 0.6,
+                star.opacity,
+                star.opacity * 0.3,
               ],
-              opacity: [0, 0.5, 0],
+              // Subtle size pulsing for twinkle
+              scale: [0.8, 1, 1.2, 1, 0.8],
             }}
             transition={{
-              duration: Math.random() * 15 + 10,
-              repeat: Infinity,
-              ease: "linear",
-              delay: Math.random() * 5,
+              x: {
+                duration: 20 + Math.random() * 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 5,
+              },
+              y: {
+                duration: 25 + Math.random() * 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 5,
+              },
+              opacity: {
+                duration: star.twinkleSpeed,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 2,
+              },
+              scale: {
+                duration: star.twinkleSpeed * 0.8,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 2,
+              },
             }}
-            style={{ willChange: 'transform, opacity' }}
           />
         ))}
+      </div>
+
+      {/* Nebula-like background glow */}
+      <div className="absolute inset-0 opacity-20">
+        <div 
+          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+          }}
+        />
+        <div 
+          className="absolute bottom-1/3 right-1/4 w-64 h-64 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(34, 197, 94, 0.08) 0%, transparent 70%)',
+            filter: 'blur(30px)',
+          }}
+        />
       </div>
     </div>
   );
