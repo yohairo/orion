@@ -29,10 +29,10 @@ const MainHeadline: React.FC = () => (
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 1.0, duration: 0.8 }}
   >
-    Scale Your Business
+    Generate Real Results,
     <br />
     <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-      Without Limits
+      Not Just Features
     </span>
   </motion.h1>
 );
@@ -44,8 +44,8 @@ const Subheadline: React.FC = () => (
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 1.2, duration: 0.6 }}
   >
-    Orion's intuitive platform empowers you to design, launch, and scale automated 
-    processes—delivering real results with no technical barriers.
+    While others promise features, we deliver measurable outcomes. Our clients see 40% revenue growth 
+    and 60% cost reduction through intelligent automation that works.
   </motion.p>
 );
 
@@ -61,8 +61,8 @@ const CTAButtons: React.FC = () => (
       whileHover={{ scale: 1.02, y: -2 }}
       whileTap={{ scale: 0.98 }}
     >
-      <span>Get Started</span>
-      <ArrowRight size={20} />
+      <Phone size={20} />
+      <span>Book a Call</span>
     </motion.button>
     
     <motion.button
@@ -70,21 +70,39 @@ const CTAButtons: React.FC = () => (
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
-      <Phone size={20} />
-      <span>Talk to sales</span>
+      <span>View Case Studies</span>
+      <ArrowRight size={20} />
     </motion.button>
   </motion.div>
 );
 
 const TrustIndicator: React.FC = () => (
-  <motion.p
-    className="text-gray-500 text-sm text-center"
+  <motion.div
+    className="text-center"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: 1.6, duration: 0.4 }}
   >
-    No credit card required.
-  </motion.p>
+    <p className="text-gray-500 text-sm mb-6">Trusted by 2,800+ companies worldwide</p>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center max-w-4xl mx-auto opacity-60">
+      <div className="text-center">
+        <div className="text-2xl font-bold text-purple-400 mb-1">40%</div>
+        <div className="text-xs text-gray-500">Avg Revenue Growth</div>
+      </div>
+      <div className="text-center">
+        <div className="text-2xl font-bold text-green-400 mb-1">60%</div>
+        <div className="text-xs text-gray-500">Cost Reduction</div>
+      </div>
+      <div className="text-center">
+        <div className="text-2xl font-bold text-blue-400 mb-1">25+</div>
+        <div className="text-xs text-gray-500">Hours Saved/Week</div>
+      </div>
+      <div className="text-center">
+        <div className="text-2xl font-bold text-orange-400 mb-1">99.8%</div>
+        <div className="text-xs text-gray-500">Accuracy Rate</div>
+      </div>
+    </div>
+  </motion.div>
 );
 
 // Main Hero Component

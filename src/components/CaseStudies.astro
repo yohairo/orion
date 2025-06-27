@@ -1,0 +1,312 @@
+---
+// Case Studies component with interactive expandable cards
+---
+
+<section id="case-studies" class="py-20 lg:py-32 bg-background-primary relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+        Real Results from
+        <span class="bg-gradient-primary bg-clip-text text-transparent">Real Clients</span>
+      </h2>
+      <p class="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
+        See how industry leaders transformed their operations and achieved measurable growth with Orion.
+      </p>
+    </div>
+
+    <!-- Case Studies Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+      
+      <!-- Case Study 1: Tech Startup -->
+      <div class="bg-background-card/80 backdrop-blur-xl border border-border-primary rounded-2xl overflow-hidden group hover:border-border-accent transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-main/10">
+        <div class="p-8">
+          <!-- Company Info -->
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="text-xl font-semibold text-text-primary mb-1">TechFlow Solutions</h3>
+              <p class="text-text-muted text-sm">SaaS Startup • 50 employees</p>
+            </div>
+            <div class="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Challenge -->
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-3">Challenge</h4>
+            <p class="text-text-secondary leading-relaxed">
+              Manual customer onboarding taking 48 hours per client, with 30% drop-off rate due to complexity.
+            </p>
+          </div>
+
+          <!-- Results -->
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-3">Results</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-secondary-main mb-1">2 hours</div>
+                <div class="text-xs text-text-muted">Onboarding Time</div>
+                <div class="text-xs text-text-accent">↓ 96% reduction</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-primary-main mb-1">8%</div>
+                <div class="text-xs text-text-muted">Drop-off Rate</div>
+                <div class="text-xs text-text-accent">↓ 73% improvement</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Expand Button -->
+          <button class="w-full text-primary-main text-sm font-medium flex items-center justify-center space-x-2 hover:text-primary-light transition-colors duration-300 group/btn" onclick="toggleCase(1)">
+            <span>View Full Case Study</span>
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Expanded Content -->
+        <div id="case-1" class="hidden bg-background-secondary/50 p-8 border-t border-border-primary">
+          <div class="space-y-4">
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">Implementation</h5>
+              <p class="text-text-secondary text-sm">Deployed automated email sequences, document collection, and approval workflows with real-time progress tracking.</p>
+            </div>
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">Timeline</h5>
+              <p class="text-text-secondary text-sm">Full deployment in 3 weeks with immediate 80% efficiency gains.</p>
+            </div>
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">ROI Impact</h5>
+              <p class="text-text-secondary text-sm">$2.4M additional revenue in first year from improved conversion rates and faster time-to-value.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 2: E-commerce -->
+      <div class="bg-background-card/80 backdrop-blur-xl border border-border-primary rounded-2xl overflow-hidden group hover:border-border-accent transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-main/10">
+        <div class="p-8">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="text-xl font-semibold text-text-primary mb-1">RetailMax Inc.</h3>
+              <p class="text-text-muted text-sm">E-commerce • 200 employees</p>
+            </div>
+            <div class="w-12 h-12 bg-gradient-accent rounded-xl flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-3">Challenge</h4>
+            <p class="text-text-secondary leading-relaxed">
+              Inventory management chaos causing stockouts and overstock, resulting in $500K monthly losses.
+            </p>
+          </div>
+
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-3">Results</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-secondary-main mb-1">99.7%</div>
+                <div class="text-xs text-text-muted">Stock Accuracy</div>
+                <div class="text-xs text-text-accent">↑ 35% improvement</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-primary-main mb-1">$2.1M</div>
+                <div class="text-xs text-text-muted">Annual Savings</div>
+                <div class="text-xs text-text-accent">↑ 420% ROI</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="w-full text-primary-main text-sm font-medium flex items-center justify-center space-x-2 hover:text-primary-light transition-colors duration-300 group/btn" onclick="toggleCase(2)">
+            <span>View Full Case Study</span>
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="case-2" class="hidden bg-background-secondary/50 p-8 border-t border-border-primary">
+          <div class="space-y-4">
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">Implementation</h5>
+              <p class="text-text-secondary text-sm">AI-powered demand forecasting with automated reordering and supplier management integration.</p>
+            </div>
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">Timeline</h5>
+              <p class="text-text-secondary text-sm">6-week phased rollout across 12 warehouses with zero downtime.</p>
+            </div>
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">ROI Impact</h5>
+              <p class="text-text-secondary text-sm">Eliminated stockouts, reduced carrying costs by 40%, and improved customer satisfaction by 60%.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 3: Manufacturing -->
+      <div class="bg-background-card/80 backdrop-blur-xl border border-border-primary rounded-2xl overflow-hidden group hover:border-border-accent transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-main/10">
+        <div class="p-8">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="text-xl font-semibold text-text-primary mb-1">PrecisionWorks</h3>
+              <p class="text-text-muted text-sm">Manufacturing • 500 employees</p>
+            </div>
+            <div class="w-12 h-12 bg-secondary-main rounded-xl flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-3">Challenge</h4>
+            <p class="text-text-secondary leading-relaxed">
+              Quality control bottlenecks causing 15% defect rate and production delays costing $800K annually.
+            </p>
+          </div>
+
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-3">Results</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-secondary-main mb-1">1.2%</div>
+                <div class="text-xs text-text-muted">Defect Rate</div>
+                <div class="text-xs text-text-accent">↓ 92% reduction</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-primary-main mb-1">35%</div>
+                <div class="text-xs text-text-muted">Faster Production</div>
+                <div class="text-xs text-text-accent">↑ $3.2M value</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="w-full text-primary-main text-sm font-medium flex items-center justify-center space-x-2 hover:text-primary-light transition-colors duration-300 group/btn" onclick="toggleCase(3)">
+            <span>View Full Case Study</span>
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="case-3" class="hidden bg-background-secondary/50 p-8 border-t border-border-primary">
+          <div class="space-y-4">
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">Implementation</h5>
+              <p class="text-text-secondary text-sm">Computer vision quality inspection with automated reporting and predictive maintenance scheduling.</p>
+            </div>
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">Timeline</h5>
+              <p class="text-text-secondary text-sm">8-week implementation with pilot program showing immediate 60% improvement.</p>
+            </div>
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">ROI Impact</h5>
+              <p class="text-text-secondary text-sm">Eliminated quality bottlenecks, reduced waste by 80%, and increased overall equipment effectiveness by 45%.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 4: Healthcare -->
+      <div class="bg-background-card/80 backdrop-blur-xl border border-border-primary rounded-2xl overflow-hidden group hover:border-border-accent transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-main/10">
+        <div class="p-8">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="text-xl font-semibold text-text-primary mb-1">MedCore Systems</h3>
+              <p class="text-text-muted text-sm">Healthcare Tech • 150 employees</p>
+            </div>
+            <div class="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-3">Challenge</h4>
+            <p class="text-text-secondary leading-relaxed">
+              Patient data processing taking 4+ hours per case, creating treatment delays and compliance risks.
+            </p>
+          </div>
+
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold text-text-primary mb-3">Results</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-secondary-main mb-1">12 min</div>
+                <div class="text-xs text-text-muted">Processing Time</div>
+                <div class="text-xs text-text-accent">↓ 95% reduction</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-primary-main mb-1">100%</div>
+                <div class="text-xs text-text-muted">Compliance</div>
+                <div class="text-xs text-text-accent">↑ Zero violations</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="w-full text-primary-main text-sm font-medium flex items-center justify-center space-x-2 hover:text-primary-light transition-colors duration-300 group/btn" onclick="toggleCase(4)">
+            <span>View Full Case Study</span>
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div id="case-4" class="hidden bg-background-secondary/50 p-8 border-t border-border-primary">
+          <div class="space-y-4">
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">Implementation</h5>
+              <p class="text-text-secondary text-sm">HIPAA-compliant automation with OCR document processing and intelligent data validation.</p>
+            </div>
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">Timeline</h5>
+              <p class="text-text-secondary text-sm">4-week implementation with comprehensive staff training and gradual rollout.</p>
+            </div>
+            <div>
+              <h5 class="font-semibold text-text-primary mb-2">ROI Impact</h5>
+              <p class="text-text-secondary text-sm">Improved patient outcomes, reduced administrative costs by 70%, and eliminated compliance violations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="text-center">
+      <p class="text-text-secondary mb-6">Ready to write your own success story?</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <button class="bg-primary-main hover:bg-primary-dark text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-main/30">
+          Book a Strategy Call
+        </button>
+        <button class="border border-border-accent hover:border-primary-main bg-background-glassmorphism backdrop-blur-sm text-text-primary px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:bg-background-secondary/50">
+          Download Case Studies
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Background Effects -->
+  <div class="absolute bottom-0 left-0 w-1/2 h-1/3 bg-gradient-radial opacity-20 pointer-events-none"></div>
+</section>
+
+<script>
+  function toggleCase(caseNumber) {
+    const caseElement = document.getElementById(`case-${caseNumber}`);
+    if (caseElement) {
+      caseElement.classList.toggle('hidden');
+    }
+  }
+</script> 
