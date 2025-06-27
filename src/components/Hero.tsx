@@ -23,6 +23,12 @@ const AnnouncementBadge: React.FC = () => (
 
 const ShootingStars: React.FC = () => {
   const [dimensions, setDimensions] = React.useState({ width: 1200, height: 800 });
+  const [deviceInfo, setDeviceInfo] = React.useState({
+    isMobile: false,
+    isTablet: false,
+    prefersReducedMotion: false,
+    isLowEnd: false,
+  });
 
   React.useEffect(() => {
     const updateDimensions = () => {
@@ -32,24 +38,124 @@ const ShootingStars: React.FC = () => {
       });
     };
 
+    const detectDevice = () => {
+      const width = window.innerWidth;
+      const isMobile = width < 768;
+      const isTablet = width >= 768 && width < 1024;
+      
+      // Safe feature detection with fallbacks
+      let prefersReducedMotion = false;
+      let isLowEnd = false;
+      
+      try {
+        prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      } catch (e) {
+        // Fallback for older browsers
+        prefersReducedMotion = false;
+      }
+      
+             try {
+         // Detect low-end devices
+         const nav = navigator as any;
+         isLowEnd = (
+           (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+           (nav.deviceMemory && nav.deviceMemory <= 4) ||
+           /Android.+Mobile|iPhone|iPod/.test(navigator.userAgent)
+         );
+       } catch (e) {
+         // Fallback detection
+         isLowEnd = isMobile;
+       }
+
+      setDeviceInfo({
+        isMobile,
+        isTablet,
+        prefersReducedMotion,
+        isLowEnd: isLowEnd || false,
+      });
+    };
+
     updateDimensions();
+    detectDevice();
+    
     window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
+    window.addEventListener('resize', detectDevice);
+    
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+      window.removeEventListener('resize', detectDevice);
+    };
   }, []);
 
-  const asteroids = React.useMemo(() => 
-    Array.from({ length: 6 }, (_, i) => ({
-      id: i,
-      delay: i * 3 + Math.random() * 3,
-      duration: 2.5 + Math.random() * 1.5,
-      startX: -100 - Math.random() * 200,
-      startY: -100 - Math.random() * 200,
-      endX: dimensions.width + 200,
-      endY: dimensions.height + 200,
-      size: 0.8 + Math.random() * 1.2,
-      brightness: 0.6 + Math.random() * 0.4,
-    })), [dimensions]
-  );
+  const asteroids = React.useMemo(() => {
+    // Increase asteroid count for more frequent appearance
+    const asteroidCount = deviceInfo.prefersReducedMotion ? 0 : 
+                         deviceInfo.isMobile ? 5 : 
+                         deviceInfo.isTablet ? 7 : 10;
+    
+    if (asteroidCount === 0) return [];
+    
+    return Array.from({ length: asteroidCount }, (_, i) => {
+      // Perfectly linear 15° trajectory - mostly vertical with slight rightward drift
+      const trajectoryAngle = (15 * Math.PI) / 180; // 15° in radians for more vertical movement
+      
+      // Simple distance calculation for complete screen coverage
+      const screenDiagonal = Math.sqrt(dimensions.width ** 2 + dimensions.height ** 2);
+      const trajectoryDistance = screenDiagonal + 800; // Extra margin
+      
+      // Spread asteroids along perpendicular line to ensure parallel movement
+      const spreadDistance = (i * 120) + Math.random() * 180;
+      const perpendicularAngle = trajectoryAngle - (Math.PI / 2); // Exactly 90° perpendicular to 15°
+      
+      // Base starting position (off-screen top-left)
+      const baseStartX = -400;
+      const baseStartY = -300;
+      
+      // Each asteroid positioned on perpendicular line for perfect parallel movement
+      const startX = baseStartX + Math.cos(perpendicularAngle) * spreadDistance;
+      const startY = baseStartY + Math.sin(perpendicularAngle) * spreadDistance;
+      
+      // Linear movement: exactly 35° from each starting position
+      const endX = startX + Math.cos(trajectoryAngle) * trajectoryDistance;
+      const endY = startY + Math.sin(trajectoryAngle) * trajectoryDistance;
+      
+      return {
+        id: i,
+        delay: i * (deviceInfo.isMobile ? 1.5 : 1) + Math.random() * 2,
+        duration: deviceInfo.isMobile ? 2 + Math.random() * 1 : 1.8 + Math.random() * 1.2,
+        startX,
+        startY,
+        endX,
+        endY,
+        size: deviceInfo.isMobile ? 1.0 + Math.random() * 1.0 : 1.2 + Math.random() * 1.5,
+        brightness: deviceInfo.isMobile ? 0.7 + Math.random() * 0.3 : 0.8 + Math.random() * 0.2,
+      };
+    });
+  }, [dimensions, deviceInfo]);
+
+  const getTrailConfig = () => {
+    if (deviceInfo.isMobile) {
+      return {
+        mainTrail: { width: 45, blur: '0px', opacity: 0.7 },
+        secondaryTrail: { width: 70, blur: '0.2px', opacity: 0.4 },
+        outerGlow: null, // Skip outer glow on mobile
+      };
+    } else if (deviceInfo.isTablet || deviceInfo.isLowEnd) {
+      return {
+        mainTrail: { width: 60, blur: '0.1px', opacity: 0.8 },
+        secondaryTrail: { width: 90, blur: '0.3px', opacity: 0.5 },
+        outerGlow: { width: 120, blur: '0.5px', opacity: 0.3 },
+      };
+    } else {
+      return {
+        mainTrail: { width: 80, blur: '0.2px', opacity: 0.9 },
+        secondaryTrail: { width: 120, blur: '0.5px', opacity: 0.6 },
+        outerGlow: { width: 160, blur: '1px', opacity: 0.4 },
+      };
+    }
+  };
+
+  const trailConfig = getTrailConfig();
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -57,6 +163,11 @@ const ShootingStars: React.FC = () => {
         <motion.div
           key={asteroid.id}
           className="absolute"
+          style={{
+            willChange: 'transform, opacity',
+            backfaceVisibility: 'hidden',
+            perspective: '1000px',
+          }}
           initial={{
             x: asteroid.startX,
             y: asteroid.startY,
@@ -65,14 +176,15 @@ const ShootingStars: React.FC = () => {
           animate={{
             x: asteroid.endX,
             y: asteroid.endY,
-            opacity: [0, asteroid.brightness, asteroid.brightness, 0],
+            opacity: [0, 0, asteroid.brightness, asteroid.brightness, 0, 0],
           }}
           transition={{
             duration: asteroid.duration,
             delay: asteroid.delay,
             repeat: Infinity,
-            repeatDelay: 8 + Math.random() * 12,
+            repeatDelay: deviceInfo.isMobile ? 3 + Math.random() * 5 : 2 + Math.random() * 4,
             ease: "linear",
+            repeatType: "loop", // Ensures clean restart cycle
           }}
         >
           {/* Main asteroid body */}
@@ -81,53 +193,64 @@ const ShootingStars: React.FC = () => {
             style={{
               width: `${asteroid.size}px`,
               height: `${asteroid.size}px`,
-              boxShadow: `
-                0 0 ${asteroid.size * 3}px rgba(255, 255, 255, 0.9),
-                0 0 ${asteroid.size * 6}px rgba(168, 85, 247, 0.5),
-                0 0 ${asteroid.size * 12}px rgba(168, 85, 247, 0.2)
-              `,
+              willChange: 'auto',
+              boxShadow: deviceInfo.isMobile ? 
+                `0 0 ${asteroid.size * 2}px rgba(255, 255, 255, 0.8)` :
+                `
+                  0 0 ${asteroid.size * 3}px rgba(255, 255, 255, 0.9),
+                  0 0 ${asteroid.size * 6}px rgba(168, 85, 247, 0.5),
+                  0 0 ${asteroid.size * 12}px rgba(168, 85, 247, 0.2)
+                `,
             }}
           />
           
-          {/* Multi-layered trailing effect */}
+          {/* Adaptive trailing effect */}
           {/* Main trail */}
           <div
             className="absolute top-0 left-0"
             style={{
-              width: `${asteroid.size * 52}px`,
+              width: `${asteroid.size * trailConfig.mainTrail.width}px`,
               height: `${asteroid.size * 0.6}px`,
               background: 'linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 20%, rgba(168,85,247,0.4) 50%, rgba(168,85,247,0.2) 80%, transparent 100%)',
-              transform: 'rotate(-135deg) translateX(10%) translateY(-50%)',
-              filter: 'blur(0.2px)',
+              transform: 'rotate(-165deg) translateX(10%) translateY(-50%)',
+              filter: `blur(${trailConfig.mainTrail.blur})`,
               borderRadius: '50px',
+              opacity: trailConfig.mainTrail.opacity,
+              willChange: 'auto',
             }}
           />
           
-          {/* Secondary trail (longer and more diffuse) */}
+          {/* Secondary trail */}
           <div
             className="absolute top-0 left-0"
             style={{
-              width: `${asteroid.size * 78}px`,
+              width: `${asteroid.size * trailConfig.secondaryTrail.width}px`,
               height: `${asteroid.size * 0.3}px`,
               background: 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(168,85,247,0.3) 30%, rgba(168,85,247,0.15) 60%, transparent 100%)',
-              transform: 'rotate(-135deg) translateX(15%) translateY(-50%)',
-              filter: 'blur(0.5px)',
+              transform: 'rotate(-165deg) translateX(15%) translateY(-50%)',
+              filter: `blur(${trailConfig.secondaryTrail.blur})`,
               borderRadius: '50px',
+              opacity: trailConfig.secondaryTrail.opacity,
+              willChange: 'auto',
             }}
           />
           
-          {/* Outer glow trail */}
-          <div
-            className="absolute top-0 left-0"
-            style={{
-              width: `${asteroid.size * 104}px`,
-              height: `${asteroid.size * 0.8}px`,
-              background: 'linear-gradient(90deg, rgba(168,85,247,0.2) 0%, rgba(168,85,247,0.1) 40%, transparent 100%)',
-              transform: 'rotate(-135deg) translateX(20%) translateY(-50%)',
-              filter: 'blur(1px)',
-              borderRadius: '50px',
-            }}
-          />
+          {/* Outer glow trail - only on desktop */}
+          {trailConfig.outerGlow && (
+            <div
+              className="absolute top-0 left-0"
+              style={{
+                width: `${asteroid.size * trailConfig.outerGlow.width}px`,
+                height: `${asteroid.size * 0.8}px`,
+                background: 'linear-gradient(90deg, rgba(168,85,247,0.2) 0%, rgba(168,85,247,0.1) 40%, transparent 100%)',
+                transform: 'rotate(-165deg) translateX(20%) translateY(-50%)',
+                filter: `blur(${trailConfig.outerGlow.blur})`,
+                borderRadius: '50px',
+                opacity: trailConfig.outerGlow.opacity,
+                willChange: 'auto',
+              }}
+            />
+          )}
         </motion.div>
       ))}
     </div>
