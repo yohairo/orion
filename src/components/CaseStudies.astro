@@ -1,5 +1,9 @@
 ---
 // Case Studies component - Professional image-based cards with modals
+import { Image } from 'astro:assets';
+import aiFileSystem from '../assets/ai-file-system.webp';
+import invoiceExtractor from '../assets/invoice-extractor.webp';
+import residentialManagement from '../assets/residential-management.webp';
 ---
 
 <style>
@@ -374,10 +378,12 @@
       <div class="star-border group relative bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-transparent transition-all duration-500 cursor-pointer w-full" data-modal="modal1">
         <!-- Project Image -->
         <div class="aspect-[4/5] bg-gray-800 relative overflow-hidden">
-          <img 
-            src="/ai-file-system.webp" 
-            alt="AI Files Management - Smart categorization and organization" 
+          <Image 
+            src={aiFileSystem}
+            alt="AI Files Management - Smart categorization and organization"
             class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:blur-sm"
+            quality={90}
+            format="webp"
           />
           <!-- Hover Overlay -->
           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-6">
@@ -414,10 +420,12 @@
       <div class="star-border group relative bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-transparent transition-all duration-500 cursor-pointer w-full" data-modal="modal2">
         <!-- Project Image -->
         <div class="aspect-[4/5] bg-gray-800 relative overflow-hidden">
-          <img 
-            src="/invoice-extractor.webp" 
-            alt="AI Invoice Extractor - Extract invoice data intelligently" 
+          <Image 
+            src={invoiceExtractor}
+            alt="AI Invoice Extractor - Extract invoice data intelligently"
             class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:blur-sm"
+            quality={90}
+            format="webp"
           />
           <!-- Hover Overlay -->
           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-6">
@@ -455,10 +463,12 @@
       <div class="star-border group relative bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-transparent transition-all duration-500 cursor-pointer w-full" data-modal="modal3">
         <!-- Project Image -->
         <div class="aspect-[4/5] bg-gray-800 relative overflow-hidden">
-          <img 
-            src="/residential-management.webp" 
-            alt="Residential Access Control - Modern security platform" 
+          <Image 
+            src={residentialManagement}
+            alt="Residential Access Control - Modern security platform"
             class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:blur-sm"
+            quality={90}
+            format="webp"
           />
           <!-- Hover Overlay -->
           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-6">
@@ -511,10 +521,12 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 lg:gap-8 mb-3 sm:mb-6 lg:mb-8">
         <div class="w-full order-1">
           <div class="aspect-[16/9] sm:aspect-[4/3] bg-background-secondary border border-white/10 rounded-lg sm:rounded-xl overflow-hidden mb-3 sm:mb-4 w-full">
-            <img 
-              src="/ai-file-system.webp" 
-              alt="AI Files Management Dashboard" 
+            <Image 
+              src={aiFileSystem}
+              alt="AI Files Management Dashboard"
               class="w-full h-full object-cover"
+              quality={90}
+              format="webp"
             />
           </div>
         </div>
@@ -565,10 +577,12 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 lg:gap-8 mb-3 sm:mb-6 lg:mb-8">
         <div class="order-1">
           <div class="aspect-[16/9] sm:aspect-[4/3] bg-background-secondary border border-white/10 rounded-lg sm:rounded-xl overflow-hidden mb-3 sm:mb-4">
-            <img 
-              src="/invoice-extractor.webp" 
-              alt="AI Invoice Extractor Dashboard" 
+            <Image 
+              src={invoiceExtractor}
+              alt="AI Invoice Extractor Dashboard"
               class="w-full h-full object-cover"
+              quality={90}
+              format="webp"
             />
           </div>
         </div>
@@ -615,10 +629,12 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 lg:gap-8 mb-3 sm:mb-6 lg:mb-8">
         <div class="order-1">
           <div class="aspect-[16/9] sm:aspect-[4/3] bg-background-secondary border border-white/10 rounded-lg sm:rounded-xl overflow-hidden mb-3 sm:mb-4">
-            <img 
-              src="/residential-management.webp" 
-              alt="Residential Access Control Dashboard" 
+            <Image 
+              src={residentialManagement}
+              alt="Residential Access Control Dashboard"
               class="w-full h-full object-cover"
+              quality={90}
+              format="webp"
             />
           </div>
         </div>
