@@ -1,86 +1,173 @@
 ---
-// Brief Service Overview component
+// Service Overview component - Professional Enhanced Design
 ---
 
-<section class="py-20 lg:py-24 bg-background-secondary relative">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="services" class="min-h-screen flex items-center py-16 sm:py-20 lg:py-24 bg-gray-800 relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
     
-    <!-- Value Proposition -->
-    <div class="text-center mb-16">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
-        Deliver Real Results,
-        <span class="bg-gradient-primary bg-clip-text text-transparent">Not Just Features</span>
+    <!-- Section Header -->
+    <div class="text-center mb-16 sm:mb-20 lg:mb-24 w-full">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6 break-words">
+        Real Software That Creates
+        <div class="relative inline-block">
+          <span class="text-white font-bold relative">
+            <span class="relative z-10">Real Business Impact</span>
+            <div 
+              class="absolute bottom-[6px] left-0 w-full h-[0.15em] bg-primary-400 transform origin-left z-0"
+              style="animation: scaleX 0.4s ease-out 1.4s forwards;"
+            ></div>
+          </span>
+        </div>
       </h2>
-      <p class="text-xl text-text-secondary max-w-4xl mx-auto leading-relaxed">
-        While others promise features, we deliver measurable outcomes. Orion transforms your business operations into profit-generating machines through intelligent automation and data-driven optimization.
+      <p class="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed break-words">
+        AI-accelerated development delivering measurable results. From MVP to enterprise solutions in record time.
       </p>
     </div>
 
-    <!-- Core Services Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+    <!-- Main Service Card -->
+    <div class="relative mb-12 sm:mb-16 w-full">
+      <!-- Gradient border effect -->
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-primary-400/20 to-blue-500/20 rounded-2xl sm:rounded-3xl blur-sm"></div>
       
-      <!-- Revenue Growth -->
-      <div class="text-center group">
-        <div class="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-          </svg>
+      <div class="relative bg-gradient-to-br from-gray-900/90 via-gray-700/90 to-gray-900/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-gray-700/50 shadow-2xl shadow-blue-500/5 w-full">
+        <!-- Decorative elements -->
+        <div class="absolute top-4 sm:top-6 right-4 sm:right-6 w-16 sm:w-20 h-16 sm:h-20 bg-gradient-to-br from-blue-500/10 to-primary-400/10 rounded-full blur-2xl"></div>
+        <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-tr from-primary-400/10 to-blue-500/10 rounded-full blur-2xl"></div>
+        
+        <!-- Content -->
+        <div class="relative z-10 text-center w-full">
+          <div class="inline-flex items-center px-3 sm:px-4 py-1 sm:py-2 bg-primary-400/10 border border-primary-400/20 rounded-full text-primary-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+            <span class="w-2 h-2 bg-primary-400 rounded-full mr-2 flex-shrink-0"></span>
+            AI-Enhanced Expertise
+          </div>
+          
+          <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-3 sm:mb-4 break-words">
+            Complete Solutions From Concept to Deployment
+          </h3>
+          
+          <p class="text-xs sm:text-sm text-gray-400 mb-4 sm:mb-6 max-w-xl mx-auto leading-relaxed break-words">
+            Solid experience combined with AI acceleration. We deliver scalable solutions that grow with your business and create measurable value.
+          </p>
+          
+          <!-- Key Features Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 w-full">
+            <div class="text-center p-3 rounded-lg bg-gray-800/30 border border-gray-700/50 w-full">
+              <div class="w-8 h-8 bg-primary-400/20 rounded-lg flex items-center justify-center mx-auto mb-2 flex-shrink-0">
+                <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-white text-xs mb-1 break-words">AI-Accelerated</h4>
+              <p class="text-xs text-gray-400 break-words">Faster development cycles</p>
+            </div>
+            
+            <div class="text-center p-3 rounded-lg bg-gray-800/30 border border-gray-700/50 w-full">
+              <div class="w-8 h-8 bg-primary-500/20 rounded-lg flex items-center justify-center mx-auto mb-2 flex-shrink-0">
+                <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-white text-xs mb-1 break-words">Full-Stack</h4>
+              <p class="text-xs text-gray-400 break-words">Complete solution delivery</p>
+            </div>
+            
+            <div class="text-center p-3 rounded-lg bg-gray-800/30 border border-gray-700/50 w-full">
+              <div class="w-8 h-8 bg-coral-400/20 rounded-lg flex items-center justify-center mx-auto mb-2 flex-shrink-0">
+                <svg class="w-4 h-4 text-coral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-white text-xs mb-1 break-words">Proven Results</h4>
+              <p class="text-xs text-gray-400 break-words">Measurable business value</p>
+            </div>
+          </div>
         </div>
-        <h3 class="text-xl font-semibold text-text-primary mb-3">Generate 40% More Revenue</h3>
-        <p class="text-text-secondary leading-relaxed">
-          Our clients see average revenue increases of 40% within 6 months through optimized workflows and automated sales processes.
-        </p>
       </div>
-
-      <!-- Cost Reduction -->
-      <div class="text-center group">
-        <div class="w-16 h-16 bg-gradient-accent rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-text-primary mb-3">Cut Operating Costs by 60%</h3>
-        <p class="text-text-secondary leading-relaxed">
-          Eliminate manual processes and reduce operational overhead with intelligent automation that works 24/7.
-        </p>
-      </div>
-
-      <!-- Time Savings -->
-      <div class="text-center group">
-        <div class="w-16 h-16 bg-secondary-main rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-text-primary mb-3">Save 25+ Hours Per Week</h3>
-        <p class="text-text-secondary leading-relaxed">
-          Free your team from repetitive tasks to focus on high-value activities that drive growth and innovation.
-        </p>
-      </div>
-
     </div>
 
-    <!-- Key Differentiator -->
-    <div class="bg-background-card/80 backdrop-blur-xl border border-border-primary rounded-2xl p-8 lg:p-12 text-center">
-      <div class="max-w-4xl mx-auto">
-        <h3 class="text-2xl lg:text-3xl font-bold text-text-primary mb-4">
-          What Makes Orion Different?
-        </h3>
-        <p class="text-lg text-text-secondary mb-6 leading-relaxed">
-          Unlike generic automation tools, Orion is purpose-built for results. We don't just automate processes—we optimize them for maximum ROI, providing real-time insights and continuous improvement recommendations.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8">
-          <div class="flex items-center space-x-2">
-            <div class="w-3 h-3 bg-secondary-main rounded-full"></div>
-            <span class="text-text-secondary font-medium">ROI-Focused Approach</span>
+    <!-- Service Details -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 w-full">
+      
+      <!-- What We Build -->
+      <div class="w-full">
+        <h3 class="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6 break-words">What We Build</h3>
+        <div class="space-y-3 sm:space-y-4 w-full">
+          <div class="flex items-start space-x-3">
+            <div class="w-7 h-7 bg-primary-400/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-semibold text-white mb-1 text-xs sm:text-sm break-words">Web Applications & E-commerce</h4>
+              <p class="text-xs text-gray-400 leading-relaxed break-words">
+                Custom platforms, SaaS solutions, and e-commerce systems built to scale.
+              </p>
+            </div>
           </div>
-          <div class="flex items-center space-x-2">
-            <div class="w-3 h-3 bg-primary-main rounded-full"></div>
-            <span class="text-text-secondary font-medium">Continuous Optimization</span>
+          
+          <div class="flex items-start space-x-3">
+            <div class="w-7 h-7 bg-primary-500/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-semibold text-white mb-1 text-xs sm:text-sm break-words">Mobile Solutions</h4>
+              <p class="text-xs text-gray-400 leading-relaxed break-words">
+                Native and cross-platform apps with seamless system integration.
+              </p>
+            </div>
           </div>
-          <div class="flex items-center space-x-2">
-            <div class="w-3 h-3 bg-secondary-accent rounded-full"></div>
-            <span class="text-text-secondary font-medium">Measurable Outcomes</span>
+          
+          <div class="flex items-start space-x-3">
+            <div class="w-7 h-7 bg-coral-400/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-coral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-semibold text-white mb-1 text-xs sm:text-sm break-words">MVP Development</h4>
+              <p class="text-xs text-gray-400 leading-relaxed break-words">
+                Rapid prototyping to validate concepts and secure funding fast.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How We're Different -->
+      <div class="w-full">
+        <h3 class="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6 break-words">How We're Different</h3>
+        <div class="space-y-3 w-full">
+          <div class="p-3 bg-gray-800/50 border border-gray-700/50 rounded-lg w-full">
+            <div class="flex items-center mb-2">
+              <div class="w-2 h-2 bg-primary-400 rounded-full mr-2 flex-shrink-0"></div>
+              <h4 class="font-semibold text-white text-xs break-words flex-1">Business-First Mindset</h4>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed ml-4 break-words">
+              We measure success by your business outcomes, not just code delivery.
+            </p>
+          </div>
+          
+          <div class="p-3 bg-gray-800/50 border border-gray-700/50 rounded-lg w-full">
+            <div class="flex items-center mb-2">
+              <div class="w-2 h-2 bg-blue-500 rounded-full mr-2 flex-shrink-0"></div>
+              <h4 class="font-semibold text-white text-xs break-words flex-1">AI-Enhanced Expertise</h4>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed ml-4 break-words">
+              Solid experience combined with AI acceleration creates faster, smarter development.
+            </p>
+          </div>
+          
+          <div class="p-3 bg-gray-800/50 border border-gray-700/50 rounded-lg w-full">
+            <div class="flex items-center mb-2">
+              <div class="w-2 h-2 bg-coral-400 rounded-full mr-2 flex-shrink-0"></div>
+              <h4 class="font-semibold text-white text-xs break-words flex-1">Collaborative Partnership</h4>
+            </div>
+            <p class="text-xs text-gray-400 leading-relaxed ml-4 break-words">
+              We work as an extension of your team, not just a vendor.
+            </p>
           </div>
         </div>
       </div>
@@ -89,6 +176,31 @@
   </div>
 
   <!-- Background Effects -->
-  <div class="absolute top-0 left-0 w-1/3 h-full bg-gradient-radial opacity-20 pointer-events-none"></div>
-  <div class="absolute bottom-0 right-0 w-1/4 h-1/2 bg-gradient-mesh opacity-10 pointer-events-none"></div>
-</section> 
+  <div class="absolute top-1/4 right-1/4 w-64 h-64 bg-primary-400/5 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-1/4 left-1/4 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
+</section>
+
+<style>
+  @keyframes scaleX {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  
+  @keyframes shine {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  .animate-shine {
+    animation: shine 3s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+</style> 

@@ -3,11 +3,13 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "start": "astro dev",
     "build": "astro check && astro build",
+    "build:analyze": "astro build --analyze",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "optimize": "astro build && npm run preview"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -23,6 +25,7 @@
     "@astrojs/check": "^0.8.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "terser": "^5.43.1",
     "typescript": "^5.5.4"
   }
 }

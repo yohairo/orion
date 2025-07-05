@@ -1,184 +1,188 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Menu, X} from 'lucide-react';
 
 const Navigation: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const navItems = ['Pages', 'Features', 'Pricing', 'About', 'Contact', 'Blog'];
+  // Throttled scroll handler for better performance
+  const handleScroll = useCallback(() => {
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+    
+    scrollTimeoutRef.current = setTimeout(() => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 50);
+    }, 16); // ~60fps throttling
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, [handleScroll]);
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(prev => !prev);
+  }, []);
+
+  const navItems = [
+    { name: 'Services', href: '#services' },
+    { name: 'Case Studies', href: '#case-studies' },
+    { name: 'Process', href: '#process' },
+    { name: 'Testimonials', href: '#testimonials' },
+    { name: 'Pricing', href: '#pricing' },
+  ];
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50"
-      style={{
-        // background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        // borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-      }}
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      initial={shouldReduceMotion ? {} : { y: -100 }}
+      animate={shouldReduceMotion ? {} : { y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'backdrop-blur-3xl shadow-2xl' 
+          : 'bg-transparent'
+      }`}
     >
-      <div className="max-w-7xl mx-auto ">
-        <div className="flex justify-between items-center h-16">
+      <div className="max-w-7xl mx-auto px-8 sm:px-8 lg:px-8">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <motion.div
-            className="flex items-center px-4 sm:px-6 lg:px-8"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+          <motion.div 
+            className="flex items-center space-x-2"
+            whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            transition={{ duration: 0.2 }}
           >
-            <div className="text-white font-bold text-xl tracking-tight">
-              ORION
-            </div>
+            <a href="#hero" className="text-xl font-bold text-white hover:text-primary-400 transition-colors duration-200">ORION</a>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8 px-4 sm:px-6 lg:px-8">
-            {navItems.map((item, index) => (
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
               <motion.a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
+                key={item.name}
+                href={item.href}
+                className="text-white/80 hover:text-primary-400 transition-colors duration-200 font-medium"
+                whileHover={shouldReduceMotion ? {} : { y: -2 }}
+                transition={{ duration: 0.2 }}
               >
-                {item}
+                {item.name}
               </motion.a>
             ))}
           </div>
 
-          {/* CTA Buttons */}
+          {/* CTA Button - Liquid Glass */}
           <div className="hidden md:flex items-center space-x-4">
             <motion.button
-              className="flex items-center space-x-2 text-gray-200 hover:text-white transition-all duration-200 text-sm font-medium px-4 py-2 rounded-lg"
+              className="relative px-3 py-1 rounded-xl font-semibold transition-all duration-300 flex items-center overflow-hidden group"
               style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                WebkitBackdropFilter: 'blur(10px)',
+                background: 'rgba(255, 164, 0, 0.15)',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 164, 0, 0.3)',
+                boxShadow: '0 8px 32px rgba(255, 164, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
               }}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              whileHover={{ 
-                scale: 1.02,
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%)',
+              whileHover={shouldReduceMotion ? {} : { 
+                scale: 1.05,
               }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.50 }}
+              transition={{ duration: 0.1, ease: "easeOut" }}
             >
-              <span>Get Started</span>
+              {/* Liquid glass background overlay */}
+              <motion.div
+                className="absolute inset-0 rounded-xl"
+                style={{
+                  background: 'linear-gradient(45deg, rgba(255, 164, 0, 0.1) 0%, rgba(234, 246, 255, 0.05) 50%, rgba(255, 164, 0, 0.1) 100%)',
+                  opacity: 0,
+                }}
+                whileHover={shouldReduceMotion ? {} : {
+                  opacity: 1,
+                  background: [
+                    'linear-gradient(45deg, rgba(255, 164, 0, 0.1) 0%, rgba(234, 246, 255, 0.05) 50%, rgba(255, 164, 0, 0.1) 100%)',
+                    'linear-gradient(225deg, rgba(255, 164, 0, 0.2) 0%, rgba(234, 246, 255, 0.1) 50%, rgba(255, 164, 0, 0.15) 100%)',
+                    'linear-gradient(45deg, rgba(255, 164, 0, 0.1) 0%, rgba(234, 246, 255, 0.05) 50%, rgba(255, 164, 0, 0.1) 100%)',
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
+              
+              {/* Liquid light reflection */}
+              <motion.div
+                className="absolute top-0 left-[-100%] w-full h-full"
+                style={{
+                  background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%)',
+                  transform: 'skewX(-20deg)',
+                }}
+                whileHover={shouldReduceMotion ? {} : {
+                  left: '100%',
+                }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              />
+              
+              {/* Button content */}
+              <div className="relative z-10 flex items-center space-x-2">
+                
+                <span className="text-white font-medium">Join today</span>
+              </div>
+              
+              {/* Glass edge highlight */}
+              <div 
+                className="absolute inset-0 rounded-xl"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 164, 0, 0.1) 100%)',
+                  pointerEvents: 'none',
+                }}
+              />
             </motion.button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden px-4 sm:px-6 lg:px-8">
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
             <motion.button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-300 hover:text-white transition-colors duration-200"
-              aria-label="Toggle menu"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              onClick={toggleMobileMenu}
+              className="text-white p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
+              whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
             >
-              <AnimatePresence mode="wait">
-                {isMenuOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X size={24} />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu size={24} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </motion.button>
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              className="md:hidden py-4 px-4"
-              style={{
-                borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-                // background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
-              }}
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ 
-                duration: 0.3, 
-                ease: "easeInOut",
-                height: { duration: 0.3 },
-                opacity: { duration: 0.2 }
-              }}
-            >
-              <motion.div 
-                className="flex flex-col space-y-4"
-                initial={{ y: -10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ delay: 0.1, duration: 0.2 }}
-              >
-                {navItems.map((item, index) => (
-                  <motion.a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-300 hover:text-white transition-colors duration-200 text-base font-medium py-2 px-2 block border-b border-gray-800/20"
-                    onClick={() => setIsMenuOpen(false)}
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ x: -20, opacity: 0 }}
-                    transition={{ 
-                      delay: 0.1 + index * 0.05, 
-                      duration: 0.2 
-                    }}
-                  >
-                    {item}
-                  </motion.a>
-                ))}
-                <motion.div 
-                  className="pt-4 pb-2"
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: 10, opacity: 0 }}
-                  transition={{ delay: 0.2, duration: 0.2 }}
-                >
-                  <button 
-                    className="w-full flex items-center justify-center text-gray-200 hover:text-white transition-all duration-200 text-base font-medium px-6 py-4 rounded-lg"
-                    style={{
-                      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      backdropFilter: 'blur(10px)',
-                      WebkitBackdropFilter: 'blur(10px)',
-                    }}
-                  >
-                    <span>Get Started</span>
-                  </button>
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <motion.div
+          initial={shouldReduceMotion ? {} : { opacity: 0, y: -10 }}
+          animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
+          exit={shouldReduceMotion ? {} : { opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+          className="md:hidden bg-background-primary/80 backdrop-blur-3xl border-t border-white/20 shadow-2xl"
+        >
+          <div className="px-4 py-6 space-y-4">
+            {navItems.map((item) => (
+              <motion.a
+                key={item.name}
+                href={item.href}
+                className="block text-white/80 hover:text-primary-400 transition-colors duration-200 font-medium py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+                whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+              >
+                {item.name}
+              </motion.a>
+            ))}
+            
+          </div>
+        </motion.div>
+      )}
     </motion.nav>
   );
 };
 
-export default Navigation; 
+export default React.memo(Navigation); 

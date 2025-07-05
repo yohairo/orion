@@ -3,16 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.tsx';
 import ServiceOverview from '../components/ServiceOverview.astro';
 import CaseStudies from '../components/CaseStudies.astro';
-import FeaturesSection from '../components/FeaturesSection.astro';
 import BenefitsSection from '../components/BenefitsSection.astro';
 import ProcessSection from '../components/ProcessSection.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 import PricingSection from '../components/PricingSection.astro';
-import ContactSection from '../components/ContactSection.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Orion - Scale Your Business Without Limits">
+<Layout title="Orion - Software That Drives Revenue, Not Just Features">
   <!-- 1. Hero Section -->
   <Hero client:load />
   
@@ -22,14 +20,9 @@ import Footer from '../components/Footer.astro';
   <!-- 3. Case Studies -->
   <CaseStudies />
   
-  <!-- 4. Benefits Section (Results-driven benefits) -->
-  <BenefitsSection />
   
   <!-- 5. Process Section -->
   <ProcessSection />
-  
-  <!-- Features (keeping existing but updated) -->
-  <FeaturesSection />
   
   <!-- 6. Testimonials -->
   <TestimonialsSection />
@@ -37,9 +30,6 @@ import Footer from '../components/Footer.astro';
   <!-- 7. Pricing -->
   <PricingSection />
   
-  <!-- 8. Contact Forms -->
-  <ContactSection />
-  
-  <!-- 9. Footer -->
+  <!-- 8. Footer -->
   <Footer />
 </Layout> 
