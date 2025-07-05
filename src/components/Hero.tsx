@@ -22,239 +22,281 @@ const AnnouncementBadge: React.FC = () => (
   </motion.div>
 );
 
+// Simple Shooting Stars Component - Safe version with trails
 const ShootingStars: React.FC = () => {
-  const [dimensions, setDimensions] = React.useState({ width: 1200, height: 800 });
-  const [deviceInfo, setDeviceInfo] = React.useState({
-    isMobile: false,
-    isTablet: false,
-    prefersReducedMotion: false,
-    isLowEnd: false,
-  });
-
   const shouldReduceMotion = useReducedMotion();
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
-    const updateDimensions = () => {
-      setDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    const detectDevice = () => {
-      const width = window.innerWidth;
-      const isMobile = width < 768;
-      const isTablet = width >= 768 && width < 1024;
-      
-      // Optimized feature detection
-      let prefersReducedMotion = false;
-      let isLowEnd = false;
-      
-      try {
-        prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      } catch (e) {
-        prefersReducedMotion = false;
-      }
-      
-      try {
-        // Simplified low-end device detection
-        const nav = navigator as any;
-        isLowEnd = isMobile || 
-          (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
-          (nav.deviceMemory && nav.deviceMemory <= 4);
-      } catch (e) {
-        isLowEnd = isMobile;
-      }
-
-      setDeviceInfo({
-        isMobile,
-        isTablet,
-        prefersReducedMotion,
-        isLowEnd: isLowEnd || false,
-      });
-    };
-
-    updateDimensions();
-    detectDevice();
-    
-    // Throttled resize listeners
-    let resizeTimer: NodeJS.Timeout;
-    const handleResize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        updateDimensions();
-        detectDevice();
-      }, 250);
-    };
-    
-    window.addEventListener('resize', handleResize, { passive: true });
-    
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(resizeTimer);
-    };
+    setMounted(true);
   }, []);
 
-  const asteroids = React.useMemo(() => {
-    // Drastically reduce asteroid count for performance
-    const asteroidCount = shouldReduceMotion || deviceInfo.prefersReducedMotion ? 0 : 
-                         deviceInfo.isMobile ? 2 : 
-                         deviceInfo.isTablet ? 3 : 4;
-    
-    if (asteroidCount === 0) return [];
-    
-    return Array.from({ length: asteroidCount }, (_, i) => {
-      // Simplified trajectory calculation
-      const trajectoryAngle = (15 * Math.PI) / 180;
-      const screenDiagonal = Math.sqrt(dimensions.width ** 2 + dimensions.height ** 2);
-      const trajectoryDistance = screenDiagonal + 400; // Reduced margin
-      
-      const spreadDistance = (i * 150) + Math.random() * 100;
-      const perpendicularAngle = trajectoryAngle - (Math.PI / 2);
-      
-      const baseStartX = -400; // Reduced from -600
-      const baseStartY = -50;
-      
-      const startX = baseStartX + Math.cos(perpendicularAngle) * spreadDistance;
-      const startY = baseStartY + Math.sin(perpendicularAngle) * spreadDistance;
-      
-      const endX = startX + Math.cos(trajectoryAngle) * trajectoryDistance;
-      const endY = startY + Math.sin(trajectoryAngle) * trajectoryDistance;
-      
-      return {
-        id: i,
-        delay: i * 2 + Math.random() * 3,
-        duration: deviceInfo.isMobile ? 1.5 + Math.random() * 0.5 : 2 + Math.random() * 1,
-        startX,
-        startY,
-        endX,
-        endY,
-        size: deviceInfo.isMobile ? 0.8 + Math.random() * 0.5 : 1 + Math.random() * 1,
-        brightness: deviceInfo.isMobile ? 0.6 + Math.random() * 0.2 : 0.7 + Math.random() * 0.3,
-      };
-    });
-  }, [dimensions, deviceInfo, shouldReduceMotion]);
-
-  const getTrailConfig = () => {
-    if (deviceInfo.isMobile || deviceInfo.isLowEnd) {
-      return {
-        mainTrail: { width: 20, blur: '0px', opacity: 0.5 },
-        secondaryTrail: null, // Skip secondary trail on mobile
-        outerGlow: null, // Skip outer glow on mobile
-      };
-    } else if (deviceInfo.isTablet) {
-      return {
-        mainTrail: { width: 30, blur: '0.1px', opacity: 0.6 },
-        secondaryTrail: { width: 45, blur: '0.2px', opacity: 0.3 },
-        outerGlow: null, // Skip outer glow on tablet
-      };
-    } else {
-      return {
-        mainTrail: { width: 40, blur: '0.2px', opacity: 0.7 },
-        secondaryTrail: { width: 60, blur: '0.3px', opacity: 0.4 },
-        outerGlow: { width: 80, blur: '0.4px', opacity: 0.2 },
-      };
-    }
-  };
-
-  const trailConfig = getTrailConfig();
-
-  // Return empty div if reduced motion is preferred
-  if (shouldReduceMotion || deviceInfo.prefersReducedMotion) {
-    return <div className="absolute inset-0 pointer-events-none overflow-hidden" />;
+  // Don't render if reduced motion is preferred or not mounted
+  if (shouldReduceMotion || !mounted) {
+    return null;
   }
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {asteroids.map((asteroid) => (
-        <motion.div
-          key={asteroid.id}
-          className="absolute"
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-1">
+      {/* Shooting star 1 with trail */}
+      <motion.div
+        className="absolute"
+        initial={{ x: -50, y: 100, opacity: 0 }}
+        animate={{ 
+          x: ["-50px", "100vw"], 
+          y: ["100px", "80vh"], 
+          opacity: [0, 1, 1, 0] 
+        }}
+        transition={{
+          duration: 1,
+          delay: 0.5,
+          repeat: Infinity,
+          repeatDelay: 8,
+          ease: "linear",
+        }}
+      >
+        {/* Main star */}
+        <div
+          className="w-0.5 h-0.5 bg-white rounded-full"
           style={{
-            willChange: 'transform, opacity',
-            transform: 'translateZ(0)', // Force GPU acceleration
+            boxShadow: '0 0 4px rgba(96, 165, 250, 1), 0 0 8px rgba(59, 130, 246, 0.9), 0 0 12px rgba(96, 165, 250, 0.6)',
           }}
-          initial={{
-            x: asteroid.startX,
-            y: asteroid.startY,
-            opacity: 0,
-          }}
-          animate={{
-            x: asteroid.endX,
-            y: asteroid.endY,
-            opacity: [0, 0, asteroid.brightness, asteroid.brightness, 0, 0],
-          }}
-          transition={{
-            duration: asteroid.duration,
-            delay: asteroid.delay,
-            repeat: Infinity,
-            repeatDelay: deviceInfo.isMobile ? 4 + Math.random() * 6 : 3 + Math.random() * 5,
-            ease: "linear",
-            repeatType: "loop",
-          }}
-        >
-          {/* Simplified asteroid body */}
-          <div
-            className="bg-white rounded-full"
+        />
+        
+        {/* Trail particles */}
+        {Array.from({ length: 8 }, (_, i) => (
+          <motion.div
+            key={i}
+            className="absolute bg-white rounded-full"
             style={{
-              width: `${asteroid.size}px`,
-              height: `${asteroid.size}px`,
-              // Simplified shadow for performance
-              boxShadow: deviceInfo.isMobile ? 
-                `0 0 ${asteroid.size * 2}px rgba(255, 255, 255, 0.8)` :
-                `0 0 ${asteroid.size * 3}px rgba(255, 255, 255, 0.9), 0 0 ${asteroid.size * 6}px rgba(255, 159, 229, 0.3)`,
+              width: `${0.6 - (i * 0.04)}px`,
+              height: `${0.6 - (i * 0.04)}px`,
+              boxShadow: `0 0 ${2 - i * 0.1}px rgba(147, 197, 253, ${0.8 - i * 0.05}), 0 0 ${4 - i * 0.2}px rgba(96, 165, 250, ${0.8 - i * 0.02}), 0 0 ${6 - i * 0.3}px rgba(59, 130, 246, ${0.5 - i * 0.02})`,
+            }}
+            initial={{ x: 0, y: 0, opacity: 0 }}
+            animate={{
+              x: [`${-i * 6}px`, `${-i * 6 - 50}px`],
+              y: [`${-i * 2}px`, `${-i * 2 - 20}px`],
+              opacity: [0, 0.6 - i * 0.05, 0],
+            }}
+                         transition={{
+               duration: 1,
+               delay: 0.5 + (i * 0.02),
+               repeat: Infinity,
+               repeatDelay: 8,
+               ease: "linear",
+             }}
+          />
+        ))}
+      </motion.div>
+      
+      {/* Shooting star 2 with trail */}
+      <motion.div
+        className="absolute"
+        initial={{ x: -50, y: 250, opacity: 0 }}
+        animate={{ 
+          x: ["-50px", "100vw"], 
+          y: ["250px", "90vh"], 
+          opacity: [0, 1, 1, 0] 
+        }}
+        transition={{
+          duration: 1,
+          delay: 4,
+          repeat: Infinity,
+          repeatDelay: 8,
+          ease: "linear",
+        }}
+      >
+        {/* Main star */}
+        <div
+          className="w-0.5 h-0.5 bg-white rounded-full"
+          style={{
+            boxShadow: '0 0 4px rgba(96, 165, 250, 1), 0 0 8px rgba(59, 130, 246, 0.9), 0 0 12px rgba(96, 165, 250, 0.6)',
+          }}
+        />
+        
+        {/* Trail particles */}
+        {Array.from({ length: 8 }, (_, i) => (
+          <motion.div
+            key={i}
+            className="absolute bg-white rounded-full"
+            style={{
+              width: `${0.6 - (i * 0.04)}px`,
+              height: `${0.6 - (i * 0.04)}px`,
+              boxShadow: `0 0 ${2 - i * 0.1}px rgba(147, 197, 253, ${0.8 - i * 0.05}), 0 0 ${4 - i * 0.2}px rgba(96, 165, 250, ${0.8 - i * 0.02}), 0 0 ${6 - i * 0.3}px rgba(59, 130, 246, ${0.5 - i * 0.02})`,
+            }}
+            initial={{ x: 0, y: 0, opacity: 0 }}
+            animate={{
+              x: [`${-i * 6}px`, `${-i * 6 - 50}px`],
+              y: [`${-i * 2}px`, `${-i * 2 - 20}px`],
+              opacity: [0, 0.6 - i * 0.05, 0],
+            }}
+                         transition={{
+               duration: 1,
+               delay: 4 + (i * 0.02),
+               repeat: Infinity,
+               repeatDelay: 8,
+               ease: "linear",
+             }}
+          />
+        ))}
+      </motion.div>
+      
+      {/* Shooting star 3 with trail */}
+      <motion.div
+        className="absolute"
+        initial={{ x: -50, y: 180, opacity: 0 }}
+        animate={{ 
+          x: ["-50px", "100vw"], 
+          y: ["180px", "70vh"], 
+          opacity: [0, 1, 1, 0] 
+        }}
+        transition={{
+          duration: 1.2,
+          delay: 2,
+          repeat: Infinity,
+          repeatDelay: 10,
+          ease: "linear",
+        }}
+      >
+        {/* Main star */}
+        <div
+          className="w-0.5 h-0.5 bg-white rounded-full"
+          style={{
+            boxShadow: '0 0 4px rgba(96, 165, 250, 1), 0 0 8px rgba(59, 130, 246, 0.9), 0 0 12px rgba(96, 165, 250, 0.6)',
+          }}
+        />
+        
+        {/* Trail particles */}
+        {Array.from({ length: 6 }, (_, i) => (
+          <motion.div
+            key={i}
+            className="absolute bg-white rounded-full"
+            style={{
+              width: `${0.5 - (i * 0.04)}px`,
+              height: `${0.5 - (i * 0.04)}px`,
+              boxShadow: `0 0 ${2 - i * 0.1}px rgba(147, 197, 253, ${0.7 - i * 0.05}), 0 0 ${4 - i * 0.2}px rgba(96, 165, 250, ${0.7 - i * 0.02}), 0 0 ${6 - i * 0.3}px rgba(59, 130, 246, ${0.4 - i * 0.02})`,
+            }}
+            initial={{ x: 0, y: 0, opacity: 0 }}
+            animate={{
+              x: [`${-i * 6}px`, `${-i * 6 - 40}px`],
+              y: [`${-i * 2}px`, `${-i * 2 - 15}px`],
+              opacity: [0, 0.7 - i * 0.05, 0],
+            }}
+            transition={{
+              duration: 1.2,
+              delay: 2 + (i * 0.02),
+              repeat: Infinity,
+              repeatDelay: 10,
+              ease: "linear",
             }}
           />
-          
-          {/* Optimized trailing effect */}
-          <div
-            className="absolute top-0 left-0"
+        ))}
+      </motion.div>
+      
+      {/* Shooting star 4 with trail */}
+      <motion.div
+        className="absolute"
+        initial={{ x: -50, y: 320, opacity: 0 }}
+        animate={{ 
+          x: ["-50px", "100vw"], 
+          y: ["320px", "95vh"], 
+          opacity: [0, 1, 1, 0] 
+        }}
+        transition={{
+          duration: 0.8,
+          delay: 6,
+          repeat: Infinity,
+          repeatDelay: 12,
+          ease: "linear",
+        }}
+      >
+        {/* Main star */}
+        <div
+          className="w-0.5 h-0.5 bg-white rounded-full"
+          style={{
+            boxShadow: '0 0 4px rgba(96, 165, 250, 1), 0 0 8px rgba(59, 130, 246, 0.9), 0 0 12px rgba(96, 165, 250, 0.6)',
+          }}
+        />
+        
+        {/* Trail particles */}
+        {Array.from({ length: 5 }, (_, i) => (
+          <motion.div
+            key={i}
+            className="absolute bg-white rounded-full"
             style={{
-              width: `${asteroid.size * trailConfig.mainTrail.width}px`,
-              height: `${asteroid.size * 0.6}px`,
-              background: deviceInfo.isMobile ? 
-                'linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 50%, transparent 100%)' :
-                'linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 20%, rgba(255,159,229,0.4) 50%, rgba(255,159,229,0.2) 80%, transparent 100%)',
-              transform: 'rotate(-165deg) translateX(10%) translateY(-50%)',
-              filter: `blur(${trailConfig.mainTrail.blur})`,
-              borderRadius: '50px',
-              opacity: trailConfig.mainTrail.opacity,
+              width: `${0.4 - (i * 0.03)}px`,
+              height: `${0.4 - (i * 0.03)}px`,
+              boxShadow: `0 0 ${1.5 - i * 0.1}px rgba(147, 197, 253, ${0.6 - i * 0.05}), 0 0 ${3 - i * 0.2}px rgba(96, 165, 250, ${0.6 - i * 0.02}), 0 0 ${5 - i * 0.3}px rgba(59, 130, 246, ${0.3 - i * 0.02})`,
+            }}
+            initial={{ x: 0, y: 0, opacity: 0 }}
+            animate={{
+              x: [`${-i * 5}px`, `${-i * 5 - 30}px`],
+              y: [`${-i * 1.5}px`, `${-i * 1.5 - 12}px`],
+              opacity: [0, 0.6 - i * 0.05, 0],
+            }}
+            transition={{
+              duration: 0.8,
+              delay: 6 + (i * 0.015),
+              repeat: Infinity,
+              repeatDelay: 12,
+              ease: "linear",
             }}
           />
-          
-          {/* Secondary trail - only on desktop */}
-          {trailConfig.secondaryTrail && (
-            <div
-              className="absolute top-0 left-0"
-              style={{
-                width: `${asteroid.size * trailConfig.secondaryTrail.width}px`,
-                height: `${asteroid.size * 0.4}px`,
-                background: 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,159,229,0.3) 30%, rgba(255,159,229,0.1) 60%, transparent 100%)',
-                transform: 'rotate(-165deg) translateX(5%) translateY(-50%)',
-                filter: `blur(${trailConfig.secondaryTrail.blur})`,
-                borderRadius: '50px',
-                opacity: trailConfig.secondaryTrail.opacity,
-              }}
-            />
-          )}
-          
-          {/* Outer glow - only on high-end desktop */}
-          {trailConfig.outerGlow && (
-            <div
-              className="absolute top-0 left-0"
-              style={{
-                width: `${asteroid.size * trailConfig.outerGlow.width}px`,
-                height: `${asteroid.size * 0.3}px`,
-                background: 'linear-gradient(90deg, rgba(255,159,229,0.2) 0%, rgba(255,159,229,0.1) 40%, transparent 100%)',
-                transform: 'rotate(-165deg) translateY(-50%)',
-                filter: `blur(${trailConfig.outerGlow.blur})`,
-                borderRadius: '50px',
-                opacity: trailConfig.outerGlow.opacity,
-              }}
-            />
-          )}
-        </motion.div>
-      ))}
+        ))}
+      </motion.div>
+      
+      {/* Shooting star 5 with trail - smaller, distant */}
+      <motion.div
+        className="absolute"
+        initial={{ x: -30, y: 50, opacity: 0 }}
+        animate={{ 
+          x: ["-30px", "100vw"], 
+          y: ["50px", "40vh"], 
+          opacity: [0, 1, 1, 0] 
+        }}
+        transition={{
+          duration: 1.5,
+          delay: 8,
+          repeat: Infinity,
+          repeatDelay: 15,
+          ease: "linear",
+        }}
+      >
+        {/* Main star */}
+        <div
+          className="w-0.5 h-0.5 bg-white rounded-full"
+          style={{
+            boxShadow: '0 0 3px rgba(96, 165, 250, 0.8), 0 0 6px rgba(59, 130, 246, 0.7), 0 0 9px rgba(96, 165, 250, 0.4)',
+          }}
+        />
+        
+        {/* Trail particles */}
+        {Array.from({ length: 4 }, (_, i) => (
+          <motion.div
+            key={i}
+            className="absolute bg-white rounded-full"
+            style={{
+              width: `${0.3 - (i * 0.03)}px`,
+              height: `${0.3 - (i * 0.03)}px`,
+              boxShadow: `0 0 ${1 - i * 0.1}px rgba(147, 197, 253, ${0.5 - i * 0.05}), 0 0 ${2 - i * 0.2}px rgba(96, 165, 250, ${0.5 - i * 0.02}), 0 0 ${3 - i * 0.3}px rgba(59, 130, 246, ${0.2 - i * 0.02})`,
+            }}
+            initial={{ x: 0, y: 0, opacity: 0 }}
+            animate={{
+              x: [`${-i * 4}px`, `${-i * 4 - 25}px`],
+              y: [`${-i * 1}px`, `${-i * 1 - 8}px`],
+              opacity: [0, 0.5 - i * 0.05, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              delay: 8 + (i * 0.02),
+              repeat: Infinity,
+              repeatDelay: 15,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </motion.div>
     </div>
   );
 };
@@ -277,7 +319,7 @@ const MainHeadline: React.FC = () => (
           className="absolute top-1/2 left-0 w-full h-[0.15em] bg-primary-400"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ delay: 1.4, duration: 0.4 }}
+          transition={{ delay: 1.4, duration: 0.6 }}
         />
       </span>
     </div>
@@ -371,7 +413,7 @@ const TrustIndicator: React.FC = () => (
     className="text-center px-4"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
-    transition={{ delay: 1.6, duration: 0.4 }}
+    transition={{ delay: 1.6, duration: 0.6 }}
   >
     <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6">Trusted by 100+ fast-growing companies worldwide</p>
     <p className="text-primary-400 text-xs">⚡ Free audit includes growth roadmap (normally $2,500)</p>
@@ -417,7 +459,7 @@ const CentralLight: React.FC = () => {
           style={{
             width: '300px',
             height: '300px', // Tall inner glow
-            background: 'radial-gradient(ellipse, rgba(255, 164, 0, 0.4) 0%, rgba(255, 164, 0, 0.2) 30%, rgba(234, 246, 255, 0.1) 60%, transparent 85%)',
+            background: 'radial-gradient(ellipse, rgba(255, 164, 0, 0.6) 0%, rgba(255, 164, 0, 0.2) 30%, rgba(234, 246, 255, 0.1) 60%, transparent 85%)',
             filter: 'blur(30px)',
             borderRadius: '50%',
             position: 'absolute',
@@ -467,7 +509,7 @@ const Hero: React.FC = () => {
         </React.Suspense>
       )}
       
-      {/* Shooting Stars */}
+      {/* Shooting Stars - Simple version */}
       <ShootingStars />
       
       {/* Main Content */}
@@ -478,7 +520,7 @@ const Hero: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.2 }}
               className="flex justify-center"
             >
               <AnnouncementBadge />
@@ -497,7 +539,7 @@ const Hero: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
             >
               <Subheadline />
             </motion.div>
