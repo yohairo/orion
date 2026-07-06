@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://orion.dev',
@@ -13,18 +13,15 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    tailwind()
   ],
-  build: {
-    // Enable CSS and JS minification
-    assets: 'assets',
-    // Split chunks for better caching
-    split: true,
-  },
   output: 'static',
   compressHTML: true,
   // Performance optimizations
   vite: {
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['react-dom/client'],
+    },
     build: {
       // Enable CSS code splitting
       cssCodeSplit: true,
@@ -54,10 +51,9 @@ export default defineConfig({
         },
       },
     },
-    // Enable server-side compression
     server: {
       headers: {
-        'Cache-Control': 'public, max-age=3600',
+        'Cache-Control': 'no-cache',
       },
     },
   },

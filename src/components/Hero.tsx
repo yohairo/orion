@@ -1,10 +1,10 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Navigation from './Navigation';
 import { I18nProvider, useTranslate } from '../i18n/react';
 
-// Lazy load StarField for better initial performance
-const LazyStarField = lazy(() => import('./StarField'));
+// Dynamic import for StarField - avoids React.lazy SSR issues
+type StarFieldType = React.ComponentType<React.PropsWithChildren<{}>>;
 
 // Sub-components
 const AnnouncementBadge: React.FC = () => {
@@ -502,6 +502,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ lang = 'en' }) => {
   const shouldReduceMotion = useReducedMotion();
   const [isVisible, setIsVisible] = React.useState(false);
+  const [StarFieldComponent, setStarFieldComponent] = React.useState<StarFieldType | null>(null);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -509,6 +510,12 @@ const Hero: React.FC<HeroProps> = ({ lang = 'en' }) => {
     }, 100);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  React.useEffect(() => {
+    import('./StarField').then(mod => {
+      setStarFieldComponent(() => mod.default);
+    });
   }, []);
 
   return (
@@ -520,10 +527,10 @@ const Hero: React.FC<HeroProps> = ({ lang = 'en' }) => {
         {/* Single Central Light */}
         <CentralLight />
         
-        {/* Background StarField - Lazy loaded */}
-        {isVisible && !shouldReduceMotion && (
+        {/* Background StarField - dynamically imported */}
+        {isVisible && !shouldReduceMotion && StarFieldComponent && (
           <React.Suspense fallback={null}>
-            <LazyStarField />
+            <StarFieldComponent />
           </React.Suspense>
         )}
         
