@@ -1,5 +1,7 @@
 ---
-// Features Section component
+import { getTranslations } from '../i18n';
+const { lang = "en" } = Astro.props;
+const t = getTranslations(lang);
 ---
 
 <section id="features" class="py-20 lg:py-32 bg-background-primary relative">
@@ -7,11 +9,11 @@
     <!-- Section Header -->
     <div class="text-center mb-16">
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
-        Your MVP Built
-        <span class="bg-gradient-primary bg-clip-text text-transparent">The Right Way</span>
+        {t.features.headline1}
+        <span class="bg-gradient-primary bg-clip-text text-transparent">{t.features.headlineHighlight}</span>
       </h2>
       <p class="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-        We combine startup speed with enterprise-grade architecture. Launch fast, validate your idea, and be ready to scale when success hits.
+        {t.features.description}
       </p>
     </div>
 
@@ -25,13 +27,13 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-text-primary mb-3">6-8 Week Delivery</h3>
+          <h3 class="text-xl font-semibold text-text-primary mb-3">{t.features.f1Title}</h3>
           <p class="text-text-secondary leading-relaxed">
-            Get to market fast with our proven development sprint system. No endless development cycles - just rapid, focused execution.
+            {t.features.f1Text}
           </p>
         </div>
         <div class="flex items-center text-primary-main text-sm font-medium group-hover:text-primary-light transition-colors duration-300">
-          Our Process
+          {t.features.f1Link}
           <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
@@ -46,13 +48,13 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-text-primary mb-3">Scalable Foundation</h3>
+          <h3 class="text-xl font-semibold text-text-primary mb-3">{t.features.f2Title}</h3>
           <p class="text-text-secondary leading-relaxed">
-            Built on modern tech stack with clean architecture. When you need to scale, your codebase won't hold you back.
+            {t.features.f2Text}
           </p>
         </div>
         <div class="flex items-center text-primary-main text-sm font-medium group-hover:text-primary-light transition-colors duration-300">
-          Tech Stack
+          {t.features.f2Link}
           <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
@@ -67,13 +69,13 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-text-primary mb-3">Built for Validation</h3>
+          <h3 class="text-xl font-semibold text-text-primary mb-3">{t.features.f3Title}</h3>
           <p class="text-text-secondary leading-relaxed">
-            Analytics and user feedback tools built-in. Track key metrics and gather insights from day one.
+            {t.features.f3Text}
           </p>
         </div>
         <div class="flex items-center text-primary-main text-sm font-medium group-hover:text-primary-light transition-colors duration-300">
-          Learn More
+          {t.features.f3Link}
           <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
@@ -88,13 +90,13 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-text-primary mb-3">Enterprise-Ready</h3>
+          <h3 class="text-xl font-semibold text-text-primary mb-3">{t.features.f4Title}</h3>
           <p class="text-text-secondary leading-relaxed">
-            Security and compliance built-in from the start. Ready for enterprise customers when opportunity knocks.
+            {t.features.f4Text}
           </p>
         </div>
         <div class="flex items-center text-primary-main text-sm font-medium group-hover:text-primary-light transition-colors duration-300">
-          Security Features
+          {t.features.f4Link}
           <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
@@ -109,13 +111,13 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-text-primary mb-3">Technical Partnership</h3>
+          <h3 class="text-xl font-semibold text-text-primary mb-3">{t.features.f5Title}</h3>
           <p class="text-text-secondary leading-relaxed">
-            We're your tech co-founder. Get expert guidance on architecture decisions, scaling strategy, and technical roadmap.
+            {t.features.f5Text}
           </p>
         </div>
         <div class="flex items-center text-primary-main text-sm font-medium group-hover:text-primary-light transition-colors duration-300">
-          Partnership Details
+          {t.features.f5Link}
           <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
@@ -130,13 +132,13 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-text-primary mb-3">100% Code Ownership</h3>
+          <h3 class="text-xl font-semibold text-text-primary mb-3">{t.features.f6Title}</h3>
           <p class="text-text-secondary leading-relaxed">
-            You own all the code. Clean, documented, and ready for your team to take over when you scale.
+            {t.features.f6Text}
           </p>
         </div>
         <div class="flex items-center text-primary-main text-sm font-medium group-hover:text-primary-light transition-colors duration-300">
-          Our Standards
+          {t.features.f6Link}
           <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
@@ -146,9 +148,9 @@
 
     <!-- Bottom CTA -->
     <div class="text-center mt-16">
-      <p class="text-text-secondary mb-6">Ready to turn your SaaS idea into reality?</p>
+      <p class="text-text-secondary mb-6">{t.features.bottomText}</p>
       <button class="bg-primary-main hover:bg-primary-dark text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-main/30">
-        Book Your Strategy Call
+        {t.features.bottomCta}
       </button>
     </div>
   </div>

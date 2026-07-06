@@ -1,5 +1,7 @@
 ---
-// Process Section component - Clean Minimal Style with ORION Theme Colors & Animations
+import { getTranslations } from '../i18n';
+const { lang = "en" } = Astro.props;
+const t = getTranslations(lang);
 ---
 
 <style>
@@ -797,13 +799,13 @@
     <div class="section-header">
       <div class="section-badge">
         <div class="section-badge-dot"></div>
-        <span class="text-primary-main text-sm font-medium">Our MVP Process</span>
+        <span class="text-primary-main text-sm font-medium">{t.process.badge}</span>
       </div>
       <h2 class="main-title">
-        From Idea to 
+        {t.process.headline1}
         <div class="relative inline-block">
           <span class="text-white font-bold relative">
-            <span class="relative z-10">Launch in 6-8 Weeks</span>
+            <span class="relative z-10">{t.process.headlineHighlight}</span>
             <div 
               class="absolute bottom-[6px] left-0 w-full h-[0.15em] bg-primary-400 transform origin-left z-0"
               style="animation: scaleX 0.4s ease-out 1.4s forwards;"
@@ -812,7 +814,7 @@
         </div>
       </h2>
       <p class="main-subtitle">
-        Our battle-tested process turns your SaaS vision into reality with speed and precision. No cutting corners, just smart execution.
+        {t.process.description}
       </p>
     </div>
 
@@ -821,10 +823,10 @@
       <!-- Step 1: Strategy -->
       <div class="process-step">
         <div class="step-content">
-          <div class="step-number">Week 1</div>
-          <h3 class="step-title">Strategic Planning & Architecture</h3>
+          <div class="step-number">{t.process.step1Step}</div>
+          <h3 class="step-title">{t.process.step1Title}</h3>
           <p class="step-description">
-            We start with a deep dive into your vision. Define core features, map user journeys, and design scalable architecture that won't need a rewrite at 100K users.
+            {t.process.step1Desc}
           </p>
         </div>
         <div class="step-visual">
@@ -842,10 +844,10 @@
       <!-- Step 2: Development -->
       <div class="process-step">
         <div class="step-content">
-          <div class="step-number">Weeks 2-5</div>
-          <h3 class="step-title">Rapid Development Sprints</h3>
+          <div class="step-number">{t.process.step2Step}</div>
+          <h3 class="step-title">{t.process.step2Title}</h3>
           <p class="step-description">
-            Two-week sprints with working demos every Friday. Focus on core features first, then nice-to-haves. Built with modern stack and clean code that's ready for your future team.
+            {t.process.step2Desc}
           </p>
         </div>
         <div class="step-visual">
@@ -863,10 +865,10 @@
       <!-- Step 3: Testing -->
       <div class="process-step">
         <div class="step-content">
-          <div class="step-number">Week 6</div>
-          <h3 class="step-title">Testing & User Feedback</h3>
+          <div class="step-number">{t.process.step3Step}</div>
+          <h3 class="step-title">{t.process.step3Title}</h3>
           <p class="step-description">
-            Rigorous testing of user flows and edge cases. Set up analytics and feedback loops. Ensure your MVP is not just working, but ready for real users.
+            {t.process.step3Desc}
           </p>
         </div>
         <div class="step-visual">
@@ -883,10 +885,10 @@
       <!-- Step 4: Launch -->
       <div class="process-step">
         <div class="step-content">
-          <div class="step-number">Weeks 7-8</div>
-          <h3 class="step-title">Launch & Growth Setup</h3>
+          <div class="step-number">{t.process.step4Step}</div>
+          <h3 class="step-title">{t.process.step4Title}</h3>
           <p class="step-description">
-            Deploy to production, set up monitoring, and prepare growth tools. You get full code ownership and documentation. Ready to onboard early users and start collecting revenue.
+            {t.process.step4Desc}
           </p>
         </div>
         <div class="step-visual">
@@ -903,9 +905,9 @@
 
     <!-- Bottom CTA -->
     <div class="text-center mt-16">
-      <p class="text-text-secondary mb-6">Ready to start your MVP journey?</p>
+      <p class="text-text-secondary mb-6">{t.process.ctaTitle}</p>
       <button class="bg-primary-main hover:bg-primary-dark text-black px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-main/30 group">
-        Book Your Free Strategy Session
+        {t.process.ctaButton}
         <svg class="inline-block ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
         </svg>

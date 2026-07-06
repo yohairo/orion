@@ -1,5 +1,7 @@
 ---
-// Contact Section component with forms and scheduling
+import { getTranslations } from '../i18n';
+const { lang = "en" } = Astro.props;
+const t = getTranslations(lang);
 ---
 
 <section id="contact" class="py-20 lg:py-32 bg-background-secondary relative overflow-hidden">
@@ -8,11 +10,11 @@
     <!-- Section Header -->
     <div class="text-center mb-12 sm:mb-16">
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-4 sm:mb-6 px-2 break-words">
-        Let's Transform Your Business
-        <span class="bg-gradient-primary bg-clip-text text-transparent">Together</span>
+        {t.contact.headline1}
+        <span class="bg-gradient-primary bg-clip-text text-transparent">{t.contact.headlineHighlight}</span>
       </h2>
       <p class="text-lg sm:text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed px-2 break-words">
-        Ready to see real results? Choose how you'd like to connect with our team.
+        {t.contact.description}
       </p>
     </div>
 
@@ -22,33 +24,33 @@
       <!-- Quick Contact Form -->
       <div class="bg-background-card/80 backdrop-blur-xl border border-border-primary rounded-2xl p-6 sm:p-8 w-full">
         <div class="mb-4 sm:mb-6">
-          <h3 class="text-xl sm:text-2xl font-bold text-text-primary mb-2 sm:mb-3 break-words">Get Started Now</h3>
-          <p class="text-text-secondary text-sm sm:text-base break-words">Tell us about your project and we'll respond within 2 hours.</p>
+          <h3 class="text-xl sm:text-2xl font-bold text-text-primary mb-2 sm:mb-3 break-words">{t.contact.formTitle}</h3>
+          <p class="text-text-secondary text-sm sm:text-base break-words">{t.contact.formText}</p>
         </div>
         
         <form class="space-y-4 sm:space-y-6 w-full" id="contact-form">
           <!-- Name and Email Row -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
             <div class="w-full">
-              <label for="name" class="block text-sm font-medium text-text-primary mb-2 break-words">Full Name *</label>
+              <label for="name" class="block text-sm font-medium text-text-primary mb-2 break-words">{t.contact.nameLabel}</label>
               <input 
                 type="text" 
                 id="name" 
                 name="name" 
                 required
                 class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background-secondary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-main focus:border-transparent text-text-primary placeholder-text-muted text-sm sm:text-base"
-                placeholder="John Smith"
+                placeholder={t.contact.namePlaceholder}
               />
             </div>
             <div class="w-full">
-              <label for="email" class="block text-sm font-medium text-text-primary mb-2 break-words">Work Email *</label>
+              <label for="email" class="block text-sm font-medium text-text-primary mb-2 break-words">{t.contact.emailLabel}</label>
               <input 
                 type="email" 
                 id="email" 
                 name="email" 
                 required
                 class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background-secondary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-main focus:border-transparent text-text-primary placeholder-text-muted text-sm sm:text-base"
-                placeholder="john@company.com"
+                placeholder={t.contact.emailPlaceholder}
               />
             </div>
           </div>
@@ -56,78 +58,78 @@
           <!-- Company and Role Row -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
             <div class="w-full">
-              <label for="company" class="block text-sm font-medium text-text-primary mb-2 break-words">Company *</label>
+              <label for="company" class="block text-sm font-medium text-text-primary mb-2 break-words">{t.contact.companyLabel}</label>
               <input 
                 type="text" 
                 id="company" 
                 name="company" 
                 required
                 class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background-secondary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-main focus:border-transparent text-text-primary placeholder-text-muted text-sm sm:text-base"
-                placeholder="Acme Corp"
+                placeholder={t.contact.companyPlaceholder}
               />
             </div>
             <div class="w-full">
-              <label for="role" class="block text-sm font-medium text-text-primary mb-2 break-words">Your Role</label>
+              <label for="role" class="block text-sm font-medium text-text-primary mb-2 break-words">{t.contact.roleLabel}</label>
               <select 
                 id="role" 
                 name="role"
                 class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background-secondary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-main focus:border-transparent text-text-primary text-sm sm:text-base"
               >
-                <option value="">Select Role</option>
-                <option value="ceo">CEO/Founder</option>
-                <option value="cto">CTO</option>
-                <option value="operations">Operations Manager</option>
-                <option value="it">IT Director</option>
-                <option value="other">Other</option>
+                <option value="">{t.contact.rolePlaceholder}</option>
+                <option value="ceo">{t.contact.roleCeo}</option>
+                <option value="cto">{t.contact.roleCto}</option>
+                <option value="operations">{t.contact.roleOps}</option>
+                <option value="it">{t.contact.roleIt}</option>
+                <option value="other">{t.contact.roleOther}</option>
               </select>
             </div>
           </div>
 
           <!-- Inquiry Type -->
           <div class="w-full">
-            <label for="inquiry" class="block text-sm font-medium text-text-primary mb-2 break-words">What can we help with? *</label>
+            <label for="inquiry" class="block text-sm font-medium text-text-primary mb-2 break-words">{t.contact.inquiryLabel}</label>
             <select 
               id="inquiry" 
               name="inquiry"
               required
               class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background-secondary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-main focus:border-transparent text-text-primary text-sm sm:text-base"
             >
-              <option value="">Select Inquiry Type</option>
-              <option value="automation">Process Automation</option>
-              <option value="integration">System Integration</option>
-              <option value="analytics">Analytics & Reporting</option>
-              <option value="custom">Custom Solution</option>
-              <option value="demo">Product Demo</option>
-              <option value="pricing">Pricing Information</option>
+              <option value="">{t.contact.inquiryPlaceholder}</option>
+              <option value="automation">{t.contact.inquiryAutomation}</option>
+              <option value="integration">{t.contact.inquiryIntegration}</option>
+              <option value="analytics">{t.contact.inquiryAnalytics}</option>
+              <option value="custom">{t.contact.inquiryCustom}</option>
+              <option value="demo">{t.contact.inquiryDemo}</option>
+              <option value="pricing">{t.contact.inquiryPricing}</option>
             </select>
           </div>
 
           <!-- Message -->
           <div class="w-full">
-            <label for="message" class="block text-sm font-medium text-text-primary mb-2 break-words">Project Details</label>
+            <label for="message" class="block text-sm font-medium text-text-primary mb-2 break-words">{t.contact.messageLabel}</label>
             <textarea 
               id="message" 
               name="message" 
               rows="4"
               class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background-secondary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-main focus:border-transparent text-text-primary placeholder-text-muted resize-none text-sm sm:text-base"
-              placeholder="Tell us about your current challenges and what you're hoping to achieve..."
+              placeholder={t.contact.messagePlaceholder}
             ></textarea>
           </div>
 
           <!-- Budget Range -->
           <div class="w-full">
-            <label for="budget" class="block text-sm font-medium text-text-primary mb-2 break-words">Project Budget Range</label>
+            <label for="budget" class="block text-sm font-medium text-text-primary mb-2 break-words">{t.contact.budgetLabel}</label>
             <select 
               id="budget" 
               name="budget"
               class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-background-secondary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-main focus:border-transparent text-text-primary text-sm sm:text-base"
             >
-              <option value="">Select Budget Range</option>
-              <option value="10k-25k">$10K - $25K</option>
-              <option value="25k-50k">$25K - $50K</option>
-              <option value="50k-100k">$50K - $100K</option>
-              <option value="100k+">$100K+</option>
-              <option value="discuss">Let's Discuss</option>
+              <option value="">{t.contact.budgetPlaceholder}</option>
+              <option value="10k-25k">{t.contact.budget1}</option>
+              <option value="25k-50k">{t.contact.budget2}</option>
+              <option value="50k-100k">{t.contact.budget3}</option>
+              <option value="100k+">{t.contact.budget4}</option>
+              <option value="discuss">{t.contact.budgetDiscuss}</option>
             </select>
           </div>
 
@@ -136,7 +138,7 @@
             type="submit" 
             class="w-full bg-primary-main hover:bg-primary-dark text-white py-3 sm:py-4 rounded-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-main/30 text-sm sm:text-base break-words"
           >
-            Send Message
+            {t.contact.submitCta}
           </button>
 
           <!-- Response Time -->
@@ -145,7 +147,7 @@
               <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span class="text-xs sm:text-sm font-medium whitespace-nowrap">We'll respond within 2 hours</span>
+              <span class="text-xs sm:text-sm font-medium whitespace-nowrap">{t.contact.responseTime}</span>
             </div>
           </div>
         </form>
@@ -154,8 +156,8 @@
       <!-- Calendar Booking -->
       <div class="bg-background-card/80 backdrop-blur-xl border border-border-primary rounded-2xl p-6 sm:p-8 w-full">
         <div class="mb-4 sm:mb-6">
-          <h3 class="text-xl sm:text-2xl font-bold text-text-primary mb-2 sm:mb-3 break-words">Book a Strategy Call</h3>
-          <p class="text-text-secondary text-sm sm:text-base break-words">Schedule a 30-minute call to discuss your specific needs and get a custom solution proposal.</p>
+          <h3 class="text-xl sm:text-2xl font-bold text-text-primary mb-2 sm:mb-3 break-words">{t.contact.calendarTitle}</h3>
+          <p class="text-text-secondary text-sm sm:text-base break-words">{t.contact.calendarText}</p>
         </div>
 
         <!-- Call Benefits -->
@@ -167,8 +169,8 @@
               </svg>
             </div>
             <div class="min-w-0 flex-1">
-              <h4 class="font-semibold text-text-primary text-sm sm:text-base break-words">Custom ROI Analysis</h4>
-              <p class="text-text-secondary text-xs sm:text-sm break-words">Get a detailed breakdown of potential savings and revenue impact for your specific use case.</p>
+              <h4 class="font-semibold text-text-primary text-sm sm:text-base break-words">{t.contact.benefit1Title}</h4>
+              <p class="text-text-secondary text-xs sm:text-sm break-words">{t.contact.benefit1Text}</p>
             </div>
           </div>
           <div class="flex items-start space-x-3">
@@ -178,8 +180,8 @@
               </svg>
             </div>
             <div class="min-w-0 flex-1">
-              <h4 class="font-semibold text-text-primary text-sm sm:text-base break-words">Technical Assessment</h4>
-              <p class="text-text-secondary text-xs sm:text-sm break-words">Review your current systems and identify the best integration approach.</p>
+              <h4 class="font-semibold text-text-primary text-sm sm:text-base break-words">{t.contact.benefit2Title}</h4>
+              <p class="text-text-secondary text-xs sm:text-sm break-words">{t.contact.benefit2Text}</p>
             </div>
           </div>
           <div class="flex items-start space-x-3">
@@ -189,8 +191,8 @@
               </svg>
             </div>
             <div class="min-w-0 flex-1">
-              <h4 class="font-semibold text-text-primary text-sm sm:text-base break-words">Implementation Roadmap</h4>
-              <p class="text-text-secondary text-xs sm:text-sm break-words">Get a clear timeline and next steps for your automation project.</p>
+              <h4 class="font-semibold text-text-primary text-sm sm:text-base break-words">{t.contact.benefit3Title}</h4>
+              <p class="text-text-secondary text-xs sm:text-sm break-words">{t.contact.benefit3Text}</p>
             </div>
           </div>
         </div>
@@ -203,10 +205,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
             </div>
-            <h4 class="font-semibold text-text-primary mb-2 text-sm sm:text-base break-words">Calendar Integration</h4>
-            <p class="text-text-secondary text-xs sm:text-sm mb-4 break-words">Book directly through our scheduling system</p>
+            <h4 class="font-semibold text-text-primary mb-2 text-sm sm:text-base break-words">{t.contact.calendarIntegration}</h4>
+            <p class="text-text-secondary text-xs sm:text-sm mb-4 break-words">{t.contact.calendarIntegrationText}</p>
             <button class="bg-secondary-main hover:bg-secondary-dark text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base w-full sm:w-auto break-words">
-              Schedule 30-Min Call
+              {t.contact.calendarCta}
             </button>
           </div>
         </div>
@@ -223,8 +225,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
           </svg>
         </div>
-        <h3 class="text-lg font-semibold text-text-primary mb-2">Email Us</h3>
-        <p class="text-text-secondary text-sm mb-3">For detailed inquiries and project discussions</p>
+        <h3 class="text-lg font-semibold text-text-primary mb-2">{t.contact.emailTitle}</h3>
+        <p class="text-text-secondary text-sm mb-3">{t.contact.emailText}</p>
         <a href="mailto:hello@orion.ai" class="text-primary-main hover:text-primary-light font-medium transition-colors">
           hello@orion.ai
         </a>
@@ -237,12 +239,12 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
           </svg>
         </div>
-        <h3 class="text-lg font-semibold text-text-primary mb-2">Call Us</h3>
-        <p class="text-text-secondary text-sm mb-3">Speak directly with our solutions team</p>
+        <h3 class="text-lg font-semibold text-text-primary mb-2">{t.contact.callTitle}</h3>
+        <p class="text-text-secondary text-sm mb-3">{t.contact.callText}</p>
         <a href="tel:+1-555-0123" class="text-primary-main hover:text-primary-light font-medium transition-colors">
           +1 (555) 012-3456
         </a>
-        <div class="text-xs text-text-muted mt-1">Mon-Fri 9AM-6PM EST</div>
+        <div class="text-xs text-text-muted mt-1">{t.contact.callHours}</div>
       </div>
 
       <!-- Live Chat -->
@@ -252,12 +254,12 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
           </svg>
         </div>
-        <h3 class="text-lg font-semibold text-text-primary mb-2">Live Chat</h3>
-        <p class="text-text-secondary text-sm mb-3">Get instant answers to your questions</p>
+        <h3 class="text-lg font-semibold text-text-primary mb-2">{t.contact.chatTitle}</h3>
+        <p class="text-text-secondary text-sm mb-3">{t.contact.chatText}</p>
         <button class="text-primary-main hover:text-primary-light font-medium transition-colors">
-          Start Chat
+          {t.contact.chatCta}
         </button>
-        <div class="text-xs text-text-muted mt-1">Usually responds in 5 minutes</div>
+        <div class="text-xs text-text-muted mt-1">{t.contact.chatResponse}</div>
       </div>
 
     </div>
@@ -271,7 +273,7 @@
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
           </div>
-          <span class="text-text-secondary font-medium">SOC 2 Compliant</span>
+          <span class="text-text-secondary font-medium">{t.contact.trust1}</span>
         </div>
         <div class="flex items-center justify-center space-x-3">
           <div class="w-6 h-6 bg-secondary-main rounded-full flex items-center justify-center">
@@ -279,7 +281,7 @@
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
           </div>
-          <span class="text-text-secondary font-medium">GDPR Compliant</span>
+          <span class="text-text-secondary font-medium">{t.contact.trust2}</span>
         </div>
         <div class="flex items-center justify-center space-x-3">
           <div class="w-6 h-6 bg-secondary-main rounded-full flex items-center justify-center">
@@ -287,7 +289,7 @@
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
           </div>
-          <span class="text-text-secondary font-medium">Enterprise Security</span>
+          <span class="text-text-secondary font-medium">{t.contact.trust3}</span>
         </div>
       </div>
     </div>

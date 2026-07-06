@@ -1,5 +1,7 @@
 ---
-// Service Overview component - Professional Enhanced Design
+import { getTranslations } from '../i18n';
+const { lang = "en" } = Astro.props;
+const t = getTranslations(lang);
 ---
 
 <section id="services" class="min-h-screen flex items-center py-16 sm:py-20 lg:py-24 bg-gray-800 relative overflow-hidden">
@@ -8,10 +10,10 @@
     <!-- Section Header -->
     <div class="text-center mb-16 sm:mb-20 lg:mb-24 w-full">
       <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6 break-words">
-        Real Software That Creates
+        {t.services.headline1}
         <div class="relative inline-block">
           <span class="text-white font-bold relative">
-            <span class="relative z-10">Real Business Impact</span>
+            <span class="relative z-10">{t.services.headlineHighlight}</span>
             <div 
               class="absolute bottom-[6px] left-0 w-full h-[0.15em] bg-primary-400 transform origin-left z-0"
               style="animation: scaleX 0.4s ease-out 1.4s forwards;"
@@ -20,7 +22,7 @@
         </div>
       </h2>
       <p class="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed break-words">
-        AI-accelerated development delivering measurable results. From MVP to enterprise solutions in record time.
+        {t.services.description}
       </p>
     </div>
 
@@ -38,15 +40,15 @@
         <div class="relative z-10 text-center w-full">
           <div class="inline-flex items-center px-3 sm:px-4 py-1 sm:py-2 bg-primary-400/10 border border-primary-400/20 rounded-full text-primary-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
             <span class="w-2 h-2 bg-primary-400 rounded-full mr-2 flex-shrink-0"></span>
-            AI-Enhanced Expertise
+            {t.services.badge}
           </div>
           
           <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-3 sm:mb-4 break-words">
-            Complete Solutions From Concept to Deployment
+            {t.services.cardTitle}
           </h3>
           
           <p class="text-xs sm:text-sm text-gray-400 mb-4 sm:mb-6 max-w-xl mx-auto leading-relaxed break-words">
-            Solid experience combined with AI acceleration. We deliver scalable solutions that grow with your business and create measurable value.
+            {t.services.cardText}
           </p>
           
           <!-- Key Features Grid -->
@@ -57,8 +59,8 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
               </div>
-              <h4 class="font-semibold text-white text-xs mb-1 break-words">AI-Accelerated</h4>
-              <p class="text-xs text-gray-400 break-words">Faster development cycles</p>
+              <h4 class="font-semibold text-white text-xs mb-1 break-words">{t.services.pill1Title}</h4>
+              <p class="text-xs text-gray-400 break-words">{t.services.pill1Text}</p>
             </div>
             
             <div class="text-center p-3 rounded-lg bg-gray-800/30 border border-gray-700/50 w-full">
@@ -67,8 +69,8 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                 </svg>
               </div>
-              <h4 class="font-semibold text-white text-xs mb-1 break-words">Full-Stack</h4>
-              <p class="text-xs text-gray-400 break-words">Complete solution delivery</p>
+              <h4 class="font-semibold text-white text-xs mb-1 break-words">{t.services.pill2Title}</h4>
+              <p class="text-xs text-gray-400 break-words">{t.services.pill2Text}</p>
             </div>
             
             <div class="text-center p-3 rounded-lg bg-gray-800/30 border border-gray-700/50 w-full">
@@ -77,8 +79,8 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </div>
-              <h4 class="font-semibold text-white text-xs mb-1 break-words">Proven Results</h4>
-              <p class="text-xs text-gray-400 break-words">Measurable business value</p>
+              <h4 class="font-semibold text-white text-xs mb-1 break-words">{t.services.pill3Title}</h4>
+              <p class="text-xs text-gray-400 break-words">{t.services.pill3Text}</p>
             </div>
           </div>
         </div>
@@ -90,7 +92,7 @@
       
       <!-- What We Build -->
       <div class="w-full">
-        <h3 class="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6 break-words">What We Build</h3>
+        <h3 class="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6 break-words">{t.services.whatWeBuild}</h3>
         <div class="space-y-3 sm:space-y-4 w-full">
           <div class="flex items-start space-x-3">
             <div class="w-7 h-7 bg-primary-400/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -99,9 +101,9 @@
               </svg>
             </div>
             <div class="flex-1">
-              <h4 class="font-semibold text-white mb-1 text-xs sm:text-sm break-words">Web Applications & E-commerce</h4>
+              <h4 class="font-semibold text-white mb-1 text-xs sm:text-sm break-words">{t.services.item1Title}</h4>
               <p class="text-xs text-gray-400 leading-relaxed break-words">
-                Custom platforms, SaaS solutions, and e-commerce systems built to scale.
+                {t.services.item1Text}
               </p>
             </div>
           </div>
@@ -113,9 +115,9 @@
               </svg>
             </div>
             <div class="flex-1">
-              <h4 class="font-semibold text-white mb-1 text-xs sm:text-sm break-words">Mobile Solutions</h4>
+              <h4 class="font-semibold text-white mb-1 text-xs sm:text-sm break-words">{t.services.item2Title}</h4>
               <p class="text-xs text-gray-400 leading-relaxed break-words">
-                Native and cross-platform apps with seamless system integration.
+                {t.services.item2Text}
               </p>
             </div>
           </div>
@@ -127,9 +129,9 @@
               </svg>
             </div>
             <div class="flex-1">
-              <h4 class="font-semibold text-white mb-1 text-xs sm:text-sm break-words">MVP Development</h4>
+              <h4 class="font-semibold text-white mb-1 text-xs sm:text-sm break-words">{t.services.item3Title}</h4>
               <p class="text-xs text-gray-400 leading-relaxed break-words">
-                Rapid prototyping to validate concepts and secure funding fast.
+                {t.services.item3Text}
               </p>
             </div>
           </div>
@@ -138,35 +140,35 @@
 
       <!-- How We're Different -->
       <div class="w-full">
-        <h3 class="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6 break-words">How We're Different</h3>
+        <h3 class="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6 break-words">{t.services.howDifferent}</h3>
         <div class="space-y-3 w-full">
           <div class="p-3 bg-gray-800/50 border border-gray-700/50 rounded-lg w-full">
             <div class="flex items-center mb-2">
               <div class="w-2 h-2 bg-primary-400 rounded-full mr-2 flex-shrink-0"></div>
-              <h4 class="font-semibold text-white text-xs break-words flex-1">Business-First Mindset</h4>
+              <h4 class="font-semibold text-white text-xs break-words flex-1">{t.services.diff1Title}</h4>
             </div>
             <p class="text-xs text-gray-400 leading-relaxed ml-4 break-words">
-              We measure success by your business outcomes, not just code delivery.
+              {t.services.diff1Text}
             </p>
           </div>
           
           <div class="p-3 bg-gray-800/50 border border-gray-700/50 rounded-lg w-full">
             <div class="flex items-center mb-2">
               <div class="w-2 h-2 bg-blue-500 rounded-full mr-2 flex-shrink-0"></div>
-              <h4 class="font-semibold text-white text-xs break-words flex-1">AI-Enhanced Expertise</h4>
+              <h4 class="font-semibold text-white text-xs break-words flex-1">{t.services.diff2Title}</h4>
             </div>
             <p class="text-xs text-gray-400 leading-relaxed ml-4 break-words">
-              Solid experience combined with AI acceleration creates faster, smarter development.
+              {t.services.diff2Text}
             </p>
           </div>
           
           <div class="p-3 bg-gray-800/50 border border-gray-700/50 rounded-lg w-full">
             <div class="flex items-center mb-2">
               <div class="w-2 h-2 bg-coral-400 rounded-full mr-2 flex-shrink-0"></div>
-              <h4 class="font-semibold text-white text-xs break-words flex-1">Collaborative Partnership</h4>
+              <h4 class="font-semibold text-white text-xs break-words flex-1">{t.services.diff3Title}</h4>
             </div>
             <p class="text-xs text-gray-400 leading-relaxed ml-4 break-words">
-              We work as an extension of your team, not just a vendor.
+              {t.services.diff3Text}
             </p>
           </div>
         </div>

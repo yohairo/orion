@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.tsx';
+import ServiceOverview from '../../components/ServiceOverview.astro';
+import CaseStudies from '../../components/CaseStudies.astro';
+import BenefitsSection from '../../components/BenefitsSection.astro';
+import ProcessSection from '../../components/ProcessSection.astro';
+import TestimonialsSection from '../../components/TestimonialsSection.astro';
+import PricingSection from '../../components/PricingSection.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Orion - Software que Genera Ingresos, No Solo Funcionalidades" lang="es">
+  <!-- 1. Hero Section -->
+  <Hero lang="es" client:load />
+
+  <!-- 2. Brief Service Overview -->
+  <ServiceOverview lang="es" />
+
+  <!-- 3. Case Studies -->
+  <CaseStudies lang="es" />
+
+  <!-- 5. Process Section -->
+  <ProcessSection lang="es" />
+
+  <!-- 6. Testimonials -->
+  <TestimonialsSection lang="es" />
+
+  <!-- 7. Pricing -->
+  <PricingSection lang="es" />
+
+  <!-- 8. Footer -->
+  <Footer lang="es" />
+</Layout>

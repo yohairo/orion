@@ -1,5 +1,7 @@
 ---
-// Showcase Section component
+import { getTranslations } from '../i18n';
+const { lang = "en" } = Astro.props;
+const t = getTranslations(lang);
 ---
 
 <section id="showcase" class="py-20 lg:py-32 bg-background-secondary relative">
@@ -10,11 +12,11 @@
       <!-- Content -->
       <div class="order-2 lg:order-1">
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
-          Simplify Your
-          <span class="bg-gradient-primary bg-clip-text text-transparent">Workflows</span>
+          {t.showcase.block1Title1}
+          <span class="bg-gradient-primary bg-clip-text text-transparent">{t.showcase.block1TitleHighlight}</span>
         </h2>
         <p class="text-xl text-text-secondary mb-8 leading-relaxed">
-          Transform complex business processes into simple, automated workflows. Our intuitive drag-and-drop interface makes it easy to design, deploy, and manage workflows that save time and reduce errors.
+          {t.showcase.block1Text}
         </p>
         
         <!-- Supporting Points -->
@@ -25,7 +27,7 @@
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
             </div>
-            <p class="text-text-secondary">Drag-and-drop workflow builder with 200+ pre-built templates</p>
+            <p class="text-text-secondary">{t.showcase.block1Point1}</p>
           </div>
           <div class="flex items-start space-x-3">
             <div class="w-6 h-6 bg-primary-main rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -33,7 +35,7 @@
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
             </div>
-            <p class="text-text-secondary">Real-time collaboration and approval processes</p>
+            <p class="text-text-secondary">{t.showcase.block1Point2}</p>
           </div>
           <div class="flex items-start space-x-3">
             <div class="w-6 h-6 bg-primary-main rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -41,12 +43,12 @@
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
             </div>
-            <p class="text-text-secondary">Advanced analytics and performance monitoring</p>
+            <p class="text-text-secondary">{t.showcase.block1Point3}</p>
           </div>
         </div>
         
         <button class="bg-primary-main hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-main/30">
-          Explore Workflows
+          {t.showcase.block1Cta}
         </button>
       </div>
       
@@ -57,7 +59,7 @@
           <div class="space-y-4">
             <!-- Header -->
             <div class="flex items-center justify-between pb-4 border-b border-border-primary">
-              <h3 class="text-text-primary font-semibold">Workflow Builder</h3>
+              <h3 class="text-text-primary font-semibold">{t.showcase.mockup1Title}</h3>
               <div class="flex space-x-2">
                 <div class="w-2 h-2 bg-red-500 rounded-full"></div>
                 <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
@@ -112,7 +114,7 @@
         <div class="absolute -top-4 -right-4 bg-secondary-main/20 backdrop-blur-sm border border-secondary-main/30 rounded-lg p-3 animate-pulse">
           <div class="flex items-center space-x-2">
             <div class="w-2 h-2 bg-secondary-main rounded-full"></div>
-            <span class="text-xs text-secondary-main font-medium">Active</span>
+            <span class="text-xs text-secondary-main font-medium">{t.showcase.mockup1Status}</span>
           </div>
         </div>
       </div>
@@ -127,10 +129,10 @@
           <div class="space-y-4">
             <!-- Header -->
             <div class="flex items-center justify-between pb-4 border-b border-border-primary">
-              <h3 class="text-text-primary font-semibold">Performance Analytics</h3>
+              <h3 class="text-text-primary font-semibold">{t.showcase.mockup2Title}</h3>
               <div class="flex items-center space-x-2">
                 <div class="w-2 h-2 bg-secondary-main rounded-full animate-pulse"></div>
-                <span class="text-xs text-text-muted">Live</span>
+                <span class="text-xs text-text-muted">{t.showcase.mockup2Status}</span>
               </div>
             </div>
             
@@ -138,11 +140,11 @@
             <div class="grid grid-cols-2 gap-4">
               <div class="bg-background-secondary rounded-lg p-4">
                 <div class="text-2xl font-bold text-primary-main mb-1">98.7%</div>
-                <div class="text-xs text-text-muted">Uptime</div>
+                <div class="text-xs text-text-muted">{t.showcase.mockup2Stat1}</div>
               </div>
               <div class="bg-background-secondary rounded-lg p-4">
                 <div class="text-2xl font-bold text-secondary-main mb-1">2.3x</div>
-                <div class="text-xs text-text-muted">Faster</div>
+                <div class="text-xs text-text-muted">{t.showcase.mockup2Stat2}</div>
               </div>
             </div>
             
@@ -163,18 +165,18 @@
         
         <!-- Floating Metrics -->
         <div class="absolute -bottom-4 -left-4 bg-primary-main/20 backdrop-blur-sm border border-primary-main/30 rounded-lg p-3 animate-float">
-          <div class="text-primary-main font-semibold text-sm">+234% Growth</div>
+          <div class="text-primary-main font-semibold text-sm">{t.showcase.mockup2Growth}</div>
         </div>
       </div>
       
       <!-- Content -->
       <div>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
-          Powerful Analytics &
-          <span class="bg-gradient-accent bg-clip-text text-transparent">Insights</span>
+          {t.showcase.block2Title1}
+          <span class="bg-gradient-accent bg-clip-text text-transparent">{t.showcase.block2TitleHighlight}</span>
         </h2>
         <p class="text-xl text-text-secondary mb-8 leading-relaxed">
-          Make data-driven decisions with comprehensive analytics and real-time insights. Track performance, identify trends, and optimize your operations with advanced reporting tools.
+          {t.showcase.block2Text}
         </p>
         
         <!-- Supporting Points -->
@@ -185,7 +187,7 @@
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
             </div>
-            <p class="text-text-secondary">Real-time dashboards with customizable widgets</p>
+            <p class="text-text-secondary">{t.showcase.block2Point1}</p>
           </div>
           <div class="flex items-start space-x-3">
             <div class="w-6 h-6 bg-secondary-main rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -193,7 +195,7 @@
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
             </div>
-            <p class="text-text-secondary">Advanced filtering and drill-down capabilities</p>
+            <p class="text-text-secondary">{t.showcase.block2Point2}</p>
           </div>
           <div class="flex items-start space-x-3">
             <div class="w-6 h-6 bg-secondary-main rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -201,12 +203,12 @@
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
             </div>
-            <p class="text-text-secondary">Automated reports and smart alerts</p>
+            <p class="text-text-secondary">{t.showcase.block2Point3}</p>
           </div>
         </div>
         
         <button class="border border-border-primary hover:border-border-accent bg-background-glassmorphism backdrop-blur-sm text-text-primary px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:bg-background-secondary/50">
-          View Analytics Demo
+          {t.showcase.block2Cta}
         </button>
       </div>
     </div>
@@ -214,17 +216,17 @@
     <!-- Bottom Section -->
     <div class="text-center">
       <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-6">
-        Ready to Transform Your Business?
+        {t.showcase.bottomTitle}
       </h2>
       <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-8">
-        Join thousands of companies already using Orion to streamline operations and accelerate growth.
+        {t.showcase.bottomText}
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <button class="bg-primary-main hover:bg-primary-dark text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-main/30">
-          Start Free Trial
+          {t.showcase.bottomCta1}
         </button>
         <button class="border border-border-primary hover:border-border-accent bg-background-glassmorphism backdrop-blur-sm text-text-primary px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:bg-background-secondary/50">
-          Schedule Demo
+          {t.showcase.bottomCta2}
         </button>
       </div>
     </div>

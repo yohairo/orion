@@ -1,5 +1,7 @@
 ---
-// Testimonials Section component
+import { getTranslations } from '../i18n';
+const { lang = "en" } = Astro.props;
+const t = getTranslations(lang);
 ---
 
 <style>
@@ -227,10 +229,10 @@
     <!-- Section Header -->
     <div class="text-center mb-12 sm:mb-16">
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-2 break-words">
-        Success
+        {t.testimonials.headline1}
         <div class="relative inline-block">
           <span class="text-white font-bold relative">
-            <span class="relative z-10">Stories</span>
+            <span class="relative z-10">{t.testimonials.headlineHighlight}</span>
             <div 
               class="absolute bottom-[6px] left-0 w-full h-[0.15em] bg-primary-400 transform origin-left z-0"
               style="animation: scaleX 0.4s ease-out 1.4s forwards;"
@@ -239,7 +241,7 @@
         </div>
       </h2>
       <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-2 break-words">
-        From idea to funded startup in weeks. See how founders like you launched their SaaS success stories.
+        {t.testimonials.description}
       </p>
     </div>
 
@@ -271,17 +273,17 @@
         
         <!-- Quote -->
         <blockquote class="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base break-words">
-          "From idea to funded startup in 7 weeks. ORION built our MVP with the perfect balance of speed and scalability. We raised $2M seed round within 3 months of launch."
+          {t.testimonials.t1Quote}
         </blockquote>
         
         <!-- Author -->
         <div class="flex items-center">
           <div class="w-10 h-10 bg-primary-400 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
-            <span class="text-black font-medium text-sm">SJ</span>
+            <span class="text-black font-medium text-sm">{t.testimonials.t1Initials}</span>
           </div>
           <div class="min-w-0 flex-1">
-            <div class="text-white font-medium text-sm sm:text-base break-words">Sarah Johnson</div>
-            <div class="text-gray-400 text-xs sm:text-sm break-words">Founder, YC W23</div>
+            <div class="text-white font-medium text-sm sm:text-base break-words">{t.testimonials.t1Name}</div>
+            <div class="text-gray-400 text-xs sm:text-sm break-words">{t.testimonials.t1Role}</div>
           </div>
         </div>
       </div>
@@ -311,17 +313,17 @@
         
         <!-- Quote -->
         <blockquote class="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base break-words">
-          "ORION delivered our MVP in 6 weeks. The architecture is so clean that our in-house team took over seamlessly. Hit $10K MRR in month 2."
+          {t.testimonials.t2Quote}
         </blockquote>
         
         <!-- Author -->
         <div class="flex items-center">
           <div class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
-            <span class="text-black font-medium text-sm">MC</span>
+            <span class="text-black font-medium text-sm">{t.testimonials.t2Initials}</span>
           </div>
           <div class="min-w-0 flex-1">
-            <div class="text-white font-medium text-sm sm:text-base break-words">Michael Chen</div>
-            <div class="text-gray-400 text-xs sm:text-sm break-words">CEO, TechStars '24</div>
+            <div class="text-white font-medium text-sm sm:text-base break-words">{t.testimonials.t2Name}</div>
+            <div class="text-gray-400 text-xs sm:text-sm break-words">{t.testimonials.t2Role}</div>
           </div>
         </div>
       </div>
@@ -351,17 +353,17 @@
         
         <!-- Quote -->
         <blockquote class="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base break-words">
-          "Enterprise-grade MVP in 8 weeks. The architecture and documentation were so good, we passed our enterprise security review on the first try. Now at $50K MRR."
+          {t.testimonials.t3Quote}
         </blockquote>
         
         <!-- Author -->
         <div class="flex items-center">
           <div class="w-10 h-10 bg-coral-400 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
-            <span class="text-black font-medium text-sm">EW</span>
+            <span class="text-black font-medium text-sm">{t.testimonials.t3Initials}</span>
           </div>
           <div class="min-w-0 flex-1">
-            <div class="text-white font-medium text-sm sm:text-base break-words">Emily Wong</div>
-            <div class="text-gray-400 text-xs sm:text-sm break-words">Founder, 500 Startups</div>
+            <div class="text-white font-medium text-sm sm:text-base break-words">{t.testimonials.t3Name}</div>
+            <div class="text-gray-400 text-xs sm:text-sm break-words">{t.testimonials.t3Role}</div>
           </div>
         </div>
       </div>
@@ -370,13 +372,13 @@
     <!-- Simple CTA -->
     <div class="text-center w-full">
       <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 px-2 break-words">
-        Ready to build your MVP?
+        {t.testimonials.bottomTitle}
       </h3>
       <p class="text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base px-2 break-words">
-        Join these founders in turning your SaaS vision into reality. Book a free strategy call to get started.
+        {t.testimonials.bottomText}
       </p>
       <button class="bg-primary-main hover:bg-primary-dark text-black px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-main/30 group">
-        Book Your Free Strategy Call
+        {t.testimonials.bottomCta}
         <svg class="inline-block ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
         </svg>

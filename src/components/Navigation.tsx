@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Menu, X} from 'lucide-react';
+import { useTranslate } from '../i18n/react';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const t = useTranslate();
 
-  // Throttled scroll handler for better performance
   const handleScroll = useCallback(() => {
     if (scrollTimeoutRef.current) {
       clearTimeout(scrollTimeoutRef.current);
@@ -17,7 +19,7 @@ const Navigation: React.FC = () => {
     scrollTimeoutRef.current = setTimeout(() => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 50);
-    }, 16); // ~60fps throttling
+    }, 16);
   }, []);
 
   useEffect(() => {
@@ -35,11 +37,11 @@ const Navigation: React.FC = () => {
   }, []);
 
   const navItems = [
-    { name: 'Services', href: '#services' },
-    { name: 'Case Studies', href: '#case-studies' },
-    { name: 'Process', href: '#process' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Pricing', href: '#pricing' },
+    { name: t.nav.services, href: '#services' },
+    { name: t.nav.caseStudies, href: '#case-studies' },
+    { name: t.nav.process, href: '#process' },
+    { name: t.nav.testimonials, href: '#testimonials' },
+    { name: t.nav.pricing, href: '#pricing' },
   ];
 
   return (
@@ -79,8 +81,9 @@ const Navigation: React.FC = () => {
             ))}
           </div>
 
-          {/* CTA Button - Liquid Glass */}
+          {/* Language Switcher + CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
+            <LanguageSwitcher />
             <motion.button
               className="relative px-3 py-1 rounded-xl font-semibold transition-all duration-300 flex items-center overflow-hidden group"
               style={{
@@ -129,7 +132,7 @@ const Navigation: React.FC = () => {
               {/* Button content */}
               <div className="relative z-10 flex items-center space-x-2">
                 
-                <span className="text-white font-medium">Join today</span>
+                <span className="text-white font-medium">{t.nav.joinToday}</span>
               </div>
               
               {/* Glass edge highlight */}
@@ -177,7 +180,9 @@ const Navigation: React.FC = () => {
                 {item.name}
               </motion.a>
             ))}
-            
+            <div className="pt-2">
+              <LanguageSwitcher />
+            </div>
           </div>
         </motion.div>
       )}

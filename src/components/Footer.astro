@@ -1,5 +1,7 @@
 ---
-// Footer component with enhanced professional design
+import { getTranslations } from '../i18n';
+const { lang = "en" } = Astro.props;
+const t = getTranslations(lang);
 ---
 
 <footer class="bg-gray-900 border-t border-gray-800 relative overflow-hidden">
@@ -15,7 +17,7 @@
           <div class="w-2 h-2 bg-primary-400 rounded-full ml-2"></div>
         </div>
         <p class="text-gray-400 text-sm leading-relaxed mb-6">
-          Transforming innovative ideas into successful SaaS products. Startup-friendly MVP development with guaranteed 6-8 week delivery.
+          {t.footer.description}
         </p>
         <div class="flex space-x-4">
           <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
@@ -41,18 +43,18 @@
       
       <!-- Quick Links -->
       <div>
-        <h4 class="text-lg font-semibold text-white mb-6">Quick Links</h4>
+        <h4 class="text-lg font-semibold text-white mb-6">{t.footer.quickLinks}</h4>
         <ul class="space-y-4">
-          <li><a href="#process" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Our Process</a></li>
-          <li><a href="#case-studies" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Case Studies</a></li>
-          <li><a href="#pricing" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Pricing</a></li>
-          <li><a href="#testimonials" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Client Stories</a></li>
+          <li><a href="#process" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">{t.footer.ourProcess}</a></li>
+          <li><a href="#case-studies" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">{t.footer.caseStudies}</a></li>
+          <li><a href="#pricing" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">{t.footer.pricing}</a></li>
+          <li><a href="#testimonials" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">{t.footer.clientStories}</a></li>
         </ul>
       </div>
       
       <!-- Contact Info -->
       <div>
-        <h4 class="text-lg font-semibold text-white mb-6">Contact</h4>
+        <h4 class="text-lg font-semibold text-white mb-6">{t.footer.contact}</h4>
         <ul class="space-y-4">
           <li class="flex items-start">
             <svg class="w-5 h-5 text-primary-400 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,23 +72,23 @@
             <svg class="w-5 h-5 text-primary-400 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
-            <span class="text-gray-400 text-sm">Response within 24h</span>
+            <span class="text-gray-400 text-sm">{t.footer.responseTime}</span>
           </li>
         </ul>
       </div>
       
       <!-- Newsletter -->
       <div>
-        <h4 class="text-lg font-semibold text-white mb-6">Stay Updated</h4>
-        <p class="text-gray-400 text-sm mb-4">Get the latest insights on SaaS development and startup growth.</p>
+        <h4 class="text-lg font-semibold text-white mb-6">{t.footer.stayUpdated}</h4>
+        <p class="text-gray-400 text-sm mb-4">{t.footer.newsletterText}</p>
         <form class="space-y-2">
           <div class="flex">
-            <input type="email" placeholder="Enter your email" class="bg-gray-800 text-white px-4 py-2 rounded-l-lg w-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-400">
+            <input type="email" placeholder={t.footer.emailPlaceholder} class="bg-gray-800 text-white px-4 py-2 rounded-l-lg w-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-400">
             <button type="submit" class="bg-primary-400 hover:bg-primary-500 text-black px-4 py-2 rounded-r-lg text-sm font-semibold transition-colors duration-300">
-              Subscribe
+              {t.footer.subscribe}
             </button>
           </div>
-          <p class="text-xs text-gray-500">We respect your privacy. Unsubscribe at any time.</p>
+          <p class="text-xs text-gray-500">{t.footer.privacyText}</p>
         </form>
       </div>
       
@@ -96,20 +98,20 @@
     <div class="border-t border-gray-800 pt-8 mt-12">
       <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
         <div class="flex items-center space-x-4">
-          <span class="text-sm text-gray-400">© 2025 ORION</span>
+          <span class="text-sm text-gray-400">{t.footer.copyright}</span>
           <span class="text-gray-700">|</span>
-          <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors duration-300">Privacy Policy</a>
+          <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors duration-300">{t.footer.privacyPolicy}</a>
           <span class="text-gray-700">|</span>
-          <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors duration-300">Terms of Service</a>
+          <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors duration-300">{t.footer.termsOfService}</a>
         </div>
         <div class="flex items-center space-x-6">
           <div class="flex items-center">
             <div class="w-2 h-2 bg-primary-400 rounded-full mr-2"></div>
-            <span class="text-sm text-gray-400">6-8 Week Delivery</span>
+            <span class="text-sm text-gray-400">{t.footer.delivery}</span>
           </div>
           <div class="flex items-center">
             <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
-            <span class="text-sm text-gray-400">Startup Friendly</span>
+            <span class="text-sm text-gray-400">{t.footer.startupFriendly}</span>
           </div>
         </div>
       </div>

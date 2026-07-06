@@ -2,13 +2,14 @@
 export interface Props {
   title: string;
   description?: string;
+  lang?: string;
 }
 
-const { title, description = "Scale Your Business Without Limits - Orion Intelligence Platform" } = Astro.props;
+const { title, description = "Scale Your Business Without Limits - Orion Intelligence Platform", lang = "en" } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />

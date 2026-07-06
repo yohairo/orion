@@ -1,26 +1,30 @@
 import React, { lazy } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Navigation from './Navigation';
+import { I18nProvider, useTranslate } from '../i18n/react';
 
 // Lazy load StarField for better initial performance
 const LazyStarField = lazy(() => import('./StarField'));
 
 // Sub-components
-const AnnouncementBadge: React.FC = () => (
-  <motion.div
-    className="inline-flex items-center space-x-1 bg-primary-400/10 border border-primary-400/20 rounded-full px-4 py-2 mb-8"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.8, duration: 0.6 }}
-  >
-    <span className="bg-primary-400 text-black text-xs font-semibold px-2 py-1 rounded-full">
-      Limited
-    </span>
-    <span className="text-primary-400 text-sm font-medium">
-      {" "}Only 3 new clients per month
-    </span>
-  </motion.div>
-);
+const AnnouncementBadge: React.FC = () => {
+  const t = useTranslate();
+  return (
+    <motion.div
+      className="inline-flex items-center space-x-1 bg-primary-400/10 border border-primary-400/20 rounded-full px-4 py-2 mb-8"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.8, duration: 0.6 }}
+    >
+      <span className="bg-primary-400 text-black text-xs font-semibold px-2 py-1 rounded-full">
+        {t.hero.badgeLabel}
+      </span>
+      <span className="text-primary-400 text-sm font-medium">
+        {" "}{t.hero.badgeText}
+      </span>
+    </motion.div>
+  );
+};
 
 // Simple Shooting Stars Component - Safe version with trails
 const ShootingStars: React.FC = () => {
@@ -301,44 +305,51 @@ const ShootingStars: React.FC = () => {
   );
 };
 
-const MainHeadline: React.FC = () => (
-  <motion.h1
-    className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white text-center mb-4 sm:mb-6 leading-tight tracking-tight px-4"
-    style={{ fontSize: 'clamp(1.875rem, 4vw, 3.5rem)' }}
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 1.0, duration: 0.8 }}
-  >
-    Software That Drives Revenue,
-    <br />
-    <div className="relative inline-block">
-    Not Just {" "}
-      <span className="text-white relative">
-        Features
-        <motion.div 
-          className="absolute top-1/2 left-0 w-full h-[0.15em] bg-primary-400"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 1.4, duration: 0.6 }}
-        />
-      </span>
-    </div>
-  </motion.h1>
-);
+const MainHeadline: React.FC = () => {
+  const t = useTranslate();
+  return (
+    <motion.h1
+      className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white text-center mb-4 sm:mb-6 leading-tight tracking-tight px-4"
+      style={{ fontSize: 'clamp(1.875rem, 4vw, 3.5rem)' }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1.0, duration: 0.8 }}
+    >
+      {t.hero.headline1}
+      <br />
+      <div className="relative inline-block">
+      {t.hero.headline2}{" "}
+        <span className="text-white relative">
+          {t.hero.headlineHighlight}
+          <motion.div 
+            className="absolute top-1/2 left-0 w-full h-[0.15em] bg-primary-400"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 1.4, duration: 0.6 }}
+          />
+        </span>
+      </div>
+    </motion.h1>
+  );
+};
 
-const Subheadline: React.FC = () => (
-  <motion.p
-    className="text-base sm:text-lg lg:text-xl text-gray-400 text-center max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 1.2, duration: 0.6 }}
-  >
-    Join 100+ companies that increased revenue 40%+ with business-first development that delivers measurable growth in 90 days or less.
-  </motion.p>
-);
+const Subheadline: React.FC = () => {
+  const t = useTranslate();
+  return (
+    <motion.p
+      className="text-base sm:text-lg lg:text-xl text-gray-400 text-center max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1.2, duration: 0.6 }}
+    >
+      {t.hero.subheadline}
+    </motion.p>
+  );
+};
 
 const CTAButtons: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
+  const t = useTranslate();
   
   return (
     <motion.div
@@ -393,7 +404,7 @@ const CTAButtons: React.FC = () => {
         />
         
         {/* Button content */}
-        <span className="relative z-10 text-white font-medium">Let's Talk</span>
+        <span className="relative z-10 text-white font-medium">{t.hero.cta}</span>
         
         {/* Glass edge highlight */}
         <div 
@@ -408,17 +419,20 @@ const CTAButtons: React.FC = () => {
   );
 };
 
-const TrustIndicator: React.FC = () => (
-  <motion.div
-    className="text-center px-4"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 1.6, duration: 0.6 }}
-  >
-    <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6">Trusted by 100+ fast-growing companies worldwide</p>
-    <p className="text-primary-400 text-xs">⚡ Free audit includes growth roadmap (normally $2,500)</p>
-  </motion.div>
-);
+const TrustIndicator: React.FC = () => {
+  const t = useTranslate();
+  return (
+    <motion.div
+      className="text-center px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.6, duration: 0.6 }}
+    >
+      <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6">{t.hero.trustText}</p>
+      <p className="text-primary-400 text-xs">{t.hero.auditText}</p>
+    </motion.div>
+  );
+};
 
 // Single Central Light Component
 const CentralLight: React.FC = () => {
@@ -481,12 +495,15 @@ const CentralLight: React.FC = () => {
 };
 
 // Main Hero Component
-const Hero: React.FC = () => {
+interface HeroProps {
+  lang?: string;
+}
+
+const Hero: React.FC<HeroProps> = ({ lang = 'en' }) => {
   const shouldReduceMotion = useReducedMotion();
   const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
-    // Delay StarField loading to improve initial page load
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 100);
@@ -495,78 +512,80 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <div id="hero" className="relative min-h-screen flex flex-col bg-gradient-to-br from-background-primary via-background-secondary to-background-primary overflow-hidden">
-      {/* Navigation */}
-      <Navigation />
-      
-      {/* Single Central Light */}
-      <CentralLight />
-      
-      {/* Background StarField - Lazy loaded */}
-      {isVisible && !shouldReduceMotion && (
-        <React.Suspense fallback={null}>
-          <LazyStarField />
-        </React.Suspense>
-      )}
-      
-      {/* Shooting Stars - Simple version */}
-      <ShootingStars />
-      
-      {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="space-y-8">
-            {/* Announcement Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-              className="flex justify-center"
-            >
-              <AnnouncementBadge />
-            </motion.div>
+    <I18nProvider lang={lang}>
+      <div id="hero" className="relative min-h-screen flex flex-col bg-gradient-to-br from-background-primary via-background-secondary to-background-primary overflow-hidden">
+        {/* Navigation */}
+        <Navigation />
+        
+        {/* Single Central Light */}
+        <CentralLight />
+        
+        {/* Background StarField - Lazy loaded */}
+        {isVisible && !shouldReduceMotion && (
+          <React.Suspense fallback={null}>
+            <LazyStarField />
+          </React.Suspense>
+        )}
+        
+        {/* Shooting Stars - Simple version */}
+        <ShootingStars />
+        
+        {/* Main Content */}
+        <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="space-y-8">
+              {/* Announcement Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2 }}
+                className="flex justify-center"
+              >
+                <AnnouncementBadge />
+              </motion.div>
 
-            {/* Main Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <MainHeadline />
-            </motion.div>
+              {/* Main Headline */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <MainHeadline />
+              </motion.div>
 
-            {/* Subheadline */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <Subheadline />
-            </motion.div>
+              {/* Subheadline */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <Subheadline />
+              </motion.div>
 
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex justify-center"
-            >
-              <CTAButtons />
-            </motion.div>
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="flex justify-center"
+              >
+                <CTAButtons />
+              </motion.div>
 
-            {/* Trust Indicator */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="flex justify-center"
-            >
-              <TrustIndicator />
-            </motion.div>
+              {/* Trust Indicator */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="flex justify-center"
+              >
+                <TrustIndicator />
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </I18nProvider>
   );
 };
 
