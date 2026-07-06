@@ -2,33 +2,40 @@
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.tsx';
 import ServiceOverview from '../../components/ServiceOverview.astro';
-import CaseStudies from '../../components/CaseStudies.astro';
 import BenefitsSection from '../../components/BenefitsSection.astro';
+import CaseStudies from '../../components/CaseStudies.astro';
 import ProcessSection from '../../components/ProcessSection.astro';
 import TestimonialsSection from '../../components/TestimonialsSection.astro';
 import PricingSection from '../../components/PricingSection.astro';
+import ContactSection from '../../components/ContactSection.astro';
 import Footer from '../../components/Footer.astro';
 ---
 
-<Layout title="Orion - Software que Genera Ingresos, No Solo Funcionalidades" lang="es">
-  <!-- 1. Hero Section -->
+<Layout title="ORION — Deja de Pagarle a Tu Equipo por Trabajo que el Software Debería Hacer" lang="es">
+  <!-- 1. Hero -->
   <Hero lang="es" client:load />
 
-  <!-- 2. Brief Service Overview -->
+  <!-- 2. Servicios — automatizaciones primero -->
   <ServiceOverview lang="es" />
 
-  <!-- 3. Case Studies -->
+  <!-- 3. Beneficios — el costo de las ops manuales -->
+  <BenefitsSection lang="es" />
+
+  <!-- 4. Casos de éxito -->
   <CaseStudies lang="es" />
 
-  <!-- 5. Process Section -->
+  <!-- 5. Proceso -->
   <ProcessSection lang="es" />
 
-  <!-- 6. Testimonials -->
+  <!-- 6. Testimonios -->
   <TestimonialsSection lang="es" />
 
-  <!-- 7. Pricing -->
+  <!-- 7. Precios -->
   <PricingSection lang="es" />
 
-  <!-- 8. Footer -->
+  <!-- 8. Contacto — destino de los CTAs -->
+  <ContactSection lang="es" />
+
+  <!-- 9. Footer -->
   <Footer lang="es" />
 </Layout>

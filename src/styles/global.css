@@ -2,6 +2,8 @@
 
 @theme {
   --font-sans: Inter, system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-display-h1: 'Lora', Georgia, serif;
   --font-mono: JetBrains Mono, Consolas, monospace;
 
   --color-primary-50: #fffbeb;
@@ -78,6 +80,20 @@
   --animate-pulse-soft: pulseSoft 2s ease-in-out infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-twinkle: twinkle 3s ease-in-out infinite;
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: -0.03em;
+  font-optical-sizing: auto;
+}
+
+h1 {
+  font-family: var(--font-display-h1);
+  font-style: italic;
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 @keyframes fadeInUp {

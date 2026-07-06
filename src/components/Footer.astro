@@ -2,6 +2,7 @@
 import { getTranslations } from '../i18n';
 const { lang = "en" } = Astro.props;
 const t = getTranslations(lang);
+const base = lang === "es" ? "/es" : "";
 ---
 
 <footer class="bg-gray-900 border-t border-gray-800 relative overflow-hidden">
@@ -100,9 +101,9 @@ const t = getTranslations(lang);
         <div class="flex items-center space-x-4">
           <span class="text-sm text-gray-400">{t.footer.copyright}</span>
           <span class="text-gray-700">|</span>
-          <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors duration-300">{t.footer.privacyPolicy}</a>
+          <a href={`${base}/privacy`} class="text-sm text-gray-400 hover:text-white transition-colors duration-300">{t.footer.privacyPolicy}</a>
           <span class="text-gray-700">|</span>
-          <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors duration-300">{t.footer.termsOfService}</a>
+          <a href={`${base}/terms`} class="text-sm text-gray-400 hover:text-white transition-colors duration-300">{t.footer.termsOfService}</a>
         </div>
         <div class="flex items-center space-x-6">
           <div class="flex items-center">

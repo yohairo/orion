@@ -11,6 +11,10 @@ const Navigation: React.FC = () => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const t = useTranslate();
 
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '/';
+  const isHomePage = pathname === '/' || pathname === '/es' || pathname === '/es/';
+  const homeHref = isHomePage ? '#hero' : (pathname.startsWith('/es') ? '/es' : '/');
+
   const handleScroll = useCallback(() => {
     if (scrollTimeoutRef.current) {
       clearTimeout(scrollTimeoutRef.current);
@@ -42,6 +46,7 @@ const Navigation: React.FC = () => {
     { name: t.nav.process, href: '#process' },
     { name: t.nav.testimonials, href: '#testimonials' },
     { name: t.nav.pricing, href: '#pricing' },
+    { name: t.nav.contact, href: '#contact' },
   ];
 
   return (
@@ -63,7 +68,7 @@ const Navigation: React.FC = () => {
             whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
             transition={{ duration: 0.2 }}
           >
-            <a href="#hero" className="text-xl font-bold text-white hover:text-primary-400 transition-colors duration-200">ORION</a>
+            <a href={homeHref} className="text-xl font-bold text-white hover:text-primary-400 transition-colors duration-200">ORION</a>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -84,7 +89,8 @@ const Navigation: React.FC = () => {
           {/* Language Switcher + CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher />
-            <motion.button
+            <motion.a
+              href="#contact"
               className="relative px-3 py-1 rounded-xl font-semibold transition-all duration-300 flex items-center overflow-hidden group"
               style={{
                 background: 'rgba(255, 164, 0, 0.15)',
@@ -95,7 +101,7 @@ const Navigation: React.FC = () => {
               whileHover={shouldReduceMotion ? {} : { 
                 scale: 1.05,
               }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.50 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
               transition={{ duration: 0.1, ease: "easeOut" }}
             >
               {/* Liquid glass background overlay */}
@@ -143,7 +149,7 @@ const Navigation: React.FC = () => {
                   pointerEvents: 'none',
                 }}
               />
-            </motion.button>
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}

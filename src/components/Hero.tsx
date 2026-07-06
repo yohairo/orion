@@ -322,7 +322,7 @@ const MainHeadline: React.FC = () => {
         <span className="text-white relative">
           {t.hero.headlineHighlight}
           <motion.div 
-            className="absolute top-1/2 left-0 w-full h-[0.15em] bg-primary-400"
+            className="absolute bottom-[-4px] left-0 w-full h-[0.12em] bg-primary-400 origin-left"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ delay: 1.4, duration: 0.6 }}
@@ -358,7 +358,8 @@ const CTAButtons: React.FC = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.4, duration: 0.6 }}
     >
-      <motion.button
+      <motion.a
+        href="#contact"
         className="relative px-4 sm:px-5 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all duration-300 flex items-center space-x-2 w-full sm:w-auto max-w-xs overflow-hidden group"
         style={{
           background: 'rgba(255, 164, 0, 0.15)',
@@ -414,7 +415,7 @@ const CTAButtons: React.FC = () => {
             pointerEvents: 'none',
           }}
         />
-      </motion.button>
+      </motion.a>
     </motion.div>
   );
 };
