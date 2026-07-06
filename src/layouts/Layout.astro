@@ -108,7 +108,28 @@ const { title, description = "Scale Your Business Without Limits - Orion Intelli
       .absolute {
         max-width: 100vw;
       }
+
+      /*
+       * Safety net: the hero's entrance animations start from opacity:0 (baked
+       * into the SSR HTML by framer-motion). If scripting is unavailable, those
+       * elements would never animate in and the hero would look blank. Force
+       * them visible so the hero always renders without JS.
+       */
+      @media (scripting: none) {
+        #hero [style*="opacity"] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      }
     </style>
+    <noscript>
+      <style>
+        #hero [style*="opacity"] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
   </head>
   <body class="bg-background-primary text-white font-sans antialiased overflow-x-hidden w-full">
     <!-- Background Effects -->
