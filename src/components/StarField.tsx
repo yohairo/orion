@@ -149,7 +149,7 @@ const StarField: React.FC = () => {
     >
       {/* Static background stars - subtle movement */}
       <div className="absolute inset-0 opacity-20">
-        {staticStars.map((star, index) => (
+        {staticStars.map((star) => (
           <motion.div
             key={`static-${star.id}`}
             className="absolute rounded-full bg-white"
